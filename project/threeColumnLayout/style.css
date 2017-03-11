@@ -1,0 +1,163 @@
+body {
+	margin: 0;
+	padding: 0;
+}
+main {
+	margin: 20px;
+	padding: 20px;
+	min-width: 500px;
+}
+
+main, img ,.team-left, .team-center, .team-right {
+	background-color: #eee;
+	border: 1px solid #999;
+}
+.team-left, .team-center, .team-right {
+	background-color: white;
+	
+}
+
+
+/*use float begin*/
+
+/*.container:after {
+	content: "";
+	clear: both;
+	display: block;
+}*/
+
+.container {
+	display: inline-block;
+}
+
+.team-left {
+	width: 200px;
+	padding: 20px 0 20px 20px;
+	float: left;
+	
+}
+
+.team-right {
+	width: 120px;
+	float: right;
+	
+}
+
+.team-center {
+	padding: 20px;
+	margin-left: 240px;
+	margin-right: 140px;
+	min-width: 60px;
+}
+
+/*use float end*/
+
+/*use position and float begin*/
+
+/*.container {
+	position: relative;
+	
+}
+
+.clearfix:after {
+	content: "";
+	clear: both;
+	display: block;
+}
+
+.team-left {
+	width: 200px;
+	padding: 20px 0 20px 20px;
+
+	position: absolute;
+	left: 0;
+	
+}
+
+.team-right {
+	width: 120px;
+	float: right;
+	
+	right: 0;
+	
+}
+
+.team-center {
+	padding: 20px;
+	margin-left: 240px;
+	margin-right: 140px;
+}*/
+
+/*use position and float end*/
+
+
+/*use flex start*/
+
+/*.container {
+	display: flex;
+}
+
+.team-left {
+	width: 200px;
+	padding: 20px 0 20px 20px;
+	height: auto !important;
+}
+
+.team-right {
+	width: 120px;	
+}
+
+.team-center {
+	padding: 20px;
+	flex: 1;
+	margin: 0 20px;
+}
+
+
+.team-logo {
+	width: 80px;
+	float: left;
+	margin-right: 20px;
+}
+.tean-name {
+	float: right;
+}*/
+
+/*use flex end*/
+
+
+.team-logo {
+	width: 80px;
+	float: left;
+	margin-right: 20px;
+}
+.tean-name {
+	float: right;
+}
+/*center*/
+
+p {
+	text-indent: 30px;
+	font-size: 13px;
+	line-height: 1.7;
+	word-break: break-all;
+}
+
+
+/*right*/
+
+.team-right ul li{
+	list-style: none;
+	margin-left: -20px;
+}
+.my-logo {
+	width: 80px;
+	height: 80px;
+}
+.margin-top-bottom {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+.margin-bottom {
+	margin-bottom: 10px;
+}

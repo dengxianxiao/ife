@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>StyleSelectByPseudoClass</title>
+    <style type="text/css">
+    .style-select {
+        position: relative;
+        display: inline-block;
+    }
+    
+    .style-select select {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        display: block;
+        padding-left: 10px;
+        padding-right: 2em;
+        border: 1px solid #EB5168;
+        background: #fff;
+        width: 200px;
+        height: 35px;
+    }
+    
+    .select-icon {
+        background: #ef5353;
+        bottom: 5px;
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        transform: translateY(-50%);
+        width: 20px;
+        height: 20px;
+        pointer-events: none;
+    }
+    
+    .select-icon:before, .select-icon:after {
+        content: '';
+        position: absolute;
+        top: 6px;
+        pointer-events: none;
+    }
+    .select-icon:before {
+        right: 3px;
+        border-top: 8px solid #FFF;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+    }
+    .select-icon:after {
+         right: 5px;
+        border-top: 6px solid #ef5353;
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="style-select">
+        <span class="select-icon"></span>
+        <select name="" id="">
+            <option value="">one to sleect me</option>
+            <option value="">two</option>
+            <option value="">three</option>
+        </select>
+    </div>
+</body>
+
+</html>

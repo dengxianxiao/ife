@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Complicate Page</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+    <nav class="nav-top position-relative">
+        <div class="container clearfix">
+            <a href="" class="nav-top-logo float-left"><i class="fa fa-ravelry" aria-hidden="true"></i></a>
+            <a class="user-login float-right" href=""><i class="fa fa-user-o"></i>登录</a>
+            <form class="nav-top-search float-right">
+                <label class="nav-top-search-wrapper" for="nav-search">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                    <input class="nav-top-search-input" type="text" name="search" id="nav-search">
+                </label>
+            </form>
+        </div>
+    </nav>
+    <main class="container">
+        <nav class="nav-left float-left">
+            <div class="user-info">
+                <div class="user-info-1">
+                    <div class="user-img-out">
+                        <div class="user-img-in"></div>
+                    </div>
+                    <div class="user-name">ABC123</div>
+                </div>
+                <div class="user-info-2">
+                    <div class="collect"><span>110</span>
+                        <br>收藏</div>
+                    <div class="fans"><span>313</span>
+                        <br>粉丝</div>
+                </div>
+            </div>
+            <ul class="ul-level-1">
+                <li><span class="color-white"><i class="fa fa-area-chart" aria-hidden="true"></i>个人报表</span>
+                    <ul class="ul-level-2">
+                        <li><span><i class="fa fa-angle-right" aria-hidden="true"></i><i id="fold" class="fa fa-folder" aria-hidden="true"></i>文件一</span>
+                        </li>
+                        <li><span class="color-white"><i class="fa fa-angle-down" aria-hidden="true"></i><i id="fold" class="fa fa-folder" aria-hidden="true"></i>文件二</span>
+                            <ul>
+                                <li><span class="color-white"><i id="file" class="fa fa-file-text-o" aria-hidden="true"></i>文档一</li>
+								<li><span><i id="file" class="fa fa-file-text-o" aria-hidden="true"></i>文档二</li>
+							</ul>
+						</li>
+						<li><span><i class="fa fa-angle-right" aria-hidden="true"></i><i id="fold" class="fa fa-folder" aria-hidden="true"></i>文件三</span>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><span><i class="fa fa-star-o" aria-hidden="true"></i>个人收藏</span></li>
+                        <li><span><i class="fa fa-share-square-o" aria-hidden="true"></i>我的分享</span></li>
+                        <li><span><i class="fa fa-picture-o" aria-hidden="true"></i>图库</span></li>
+                        <li><span><i class="fa fa-fa" aria-hidden="true"></i>成长记录</span></li>
+                        <li><span><i class="fa fa-info-circle" aria-hidden="true"></i>账户信息</span></li>
+                    </ul>
+        </nav>
+        <article class="main-article float-right">
+            <header class="menu"><span class="opacity-5">C站 <span class="span-slash">/</span> 个人报表 <span class="span-slash">/</span> 文件二 <span class="span-slash">/</span> <span class="file-now">文档一</span></span>
+            </header>
+            <section class="section-1 position-relative">
+                <form action="">
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="col-md-1 control-label" for="search-item"><span class="opacity-5">查询项</span></label>
+                            <div class="col-md-1">
+                            <input class="form-control" type="text" id="search-item" placeholder="第一项">
+                            <span class="angle-down form-control-feedback"></span>
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-1 control-label" for="buy"><span class="opacity-5">买方</span></label>
+                            <div class="col-md-2">
+                            <input class="form-control" type="text" id="buy" placeholder="小A">
+                            <span class="angle-down form-control-feedback"></span>
+                            </div>
+
+                        </div>
+
+						<div class="col-md-1 buy-arrow">
+							<div class="arrow-left buy-arrow-position"></div>
+							<span class="buy-line"></span>
+							<span class="change-buy">换</span>
+						</div>
+
+                        <div class="form-group">
+                            <label class="col-md-1 control-label" for="date"><span class="opacity-5">日期</span></label>
+                            <div class="col-md-2">
+                            <input class="form-control" type="text" id="date" placeholder="2017-3-10">
+                            <span class="angle-down form-control-feedback"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-1 control-label" for="time"><span class="opacity-5">总耗时</span></label>
+                            <div class="col-md-1">
+                            <input class="form-control" type="text" id="time" placeholder="8 天">
+                            <span class="angle-down form-control-feedback"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+                        	<button class="search-btn main-search">搜索</button>
+                        </div>
+                    </div>
+					
+                    <div class="row">
+                        <div class="col-md-2">
+                       
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-1 control-label" for="sell"><span class="opacity-5">卖方</span></label>
+                            <div class="col-md-2">
+                            <input class="form-control" type="text" id="sell" placeholder="小C">
+                            <span class="angle-down form-control-feedback"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-1 change-sell">
+                        	<div class="arrow-left buy-arrow-position"></div>
+                        	<span class="sell-line"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-1 control-label" for="people-num"><span class="opacity-5">人数</span></label>
+                            <div class="col-md-1">
+                            <input class="form-control" type="text" id="people-num" placeholder="10 人">
+                            <span class="angle-down form-control-feedback"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-1 control-label" for="done-object"><span class="opacity-5">成交项</span></label>
+                            <div class="col-md-2">
+                            <input class="form-control" type="text" id="done-object" placeholder="10 项">
+                            <span class="angle-down form-control-feedback"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </section>
+            <section class="section-2 position-relative">
+            	<div class="angle-btn angle-left-btn">
+					<div class="angle-left"></div>
+            	</div>
+            	<div class="hour-money">
+            		<div class="hour">10:00&nbsp;am</div>
+            		<div class="money"><span class="money-icon opacity-5">￥</span><span class="money-count">1200</span></div>
+            	</div>
+            	<div class="hour-money">
+            		<div class="hour">11:00&nbsp;am</div>
+            		<div class="money"><span class="money-icon opacity-5">￥</span><span class="money-count">1200</span></div>
+            	</div>
+            	<div class="hour-money">
+            		<div class="hour">12:00&nbsp;am</div>
+            		<div class="money"><span class="money-icon opacity-5">￥</span><span class="money-count">1200</span></div>
+            	</div>
+            	<div class="hour-money">
+            		<div class="hour">01:00&nbsp;pm</div>
+            		<div class="money"><span class="money-icon opacity-5">￥</span><span class="money-count">1200</span></div>
+            	</div>
+            	<div class="hour-money">
+            		<div class="hour">02:00&nbsp;pm</div>
+            		<div class="money"><span class="money-icon opacity-5">￥</span><span class="money-count">1200</span></div>
+            	</div>
+            	<div class="hour-money">
+            		<div class="hour">03:00&nbsp;pm</div>
+            		<div class="money"><span class="money-icon opacity-5">￥</span><span class="money-count">1200</span></div>
+            	</div>
+            	<div class="angle-btn angle-right-btn">
+					<div class="angle-right"></div>
+            	</div>
+            	<div class="history-search position-relative">
+            		<div><i class="fa fa-calendar" aria-hidden="true"></i><span>历史查询</span></div>
+            	</div>
+           
+            </section>
+            <section class="section-3 clearfix position-relative">
+            	<header>2017年4月份统计</header>
+            	<div class="deal">
+					<div class="deal-1 border-left-green">
+						<div class="float-left">
+							<div>133311</div>
+							<div class="deal-name opacity-5">成交量</div>
+						</div>
+						<div class="bg-color bg-green float-right"></div>
+					</div>
+					<div class="deal-2 border-left-blue">
+						<div class="float-left">
+							<div>133311</div>
+							<div class="deal-name opacity-5">成交量</div>
+						</div>
+						<div class="bg-color bg-blue float-right"></div>
+					</div>
+					<div class="deal-3 border-left-red">
+						<div class="float-left">
+							<div>133311</div>
+							<div class="deal-name opacity-5">成交量</div>
+						</div>
+						<div class="bg-color bg-red float-right"></div>
+					</div>
+					<div class="deal-4 border-left-yellow">
+						<div class="float-left">
+							<div>133311</div>
+							<div class="deal-name opacity-5">成交量</div>
+						</div>
+						<div class="bg-color bg-yellow float-right"></div>
+					</div>
+				</div>
+            </section>
+            <section class="section-4">
+            	<div class="project float-left">
+            		<header class="opacity-5">第一组项目</header>
+            		<div class="project-container">
+            			<div class="project-btn">
+            				<button class="btn btn-default">项目一</button>
+            				<button class="btn btn-default">项目二</button>
+            				<button class="btn btn-default">项目三</button>
+            				<button class="btn btn-default">项目四</button>
+            				<button class="btn btn-default">项目五</button>
+            			</div>
+            			<div class="project-table">
+            				<div class="project-2">project-2</div>
+            				<table>
+            					<tr>
+            						<td>购买材料一</td>
+            						<td>购买材料一</td>
+            						<td>购买材料一</td>
+            						<td>购买材料一</td>
+            					</tr>
+            					<tr>
+            						<td>购买材料十一</td>
+            						<td>购买材料十一</td>
+            						<td>购买材料十一</td>
+            						<td>购买材料十一</td>
+            					</tr>
+            					<tr>
+            						<td>购买材料十三</td>
+            						<td>购买材料十三</td>
+            						<td>购买材料十三</td>
+            						<td>购买材料十三</td>
+            					</tr>
+            					<tr>
+            						<td>购买材料三十一</td>
+            						<td>购买材料三十一</td>
+            						<td>购买材料三十一</td>
+            						<td>购买材料三十一</td>
+            					</tr>
+            					<tr>
+            						<td>购买材料二十五</td>
+            						<td>购买材料二十五</td>
+            						<td>购买材料二十五</td>
+            						<td>购买材料二十五</td>
+            					</tr>
+            					<tr>
+            						<td>购买材料一</td>
+            						<td>购买材料一</td>
+            						<td>购买材料一</td>
+            						<td>购买材料一</td>
+            					</tr>
+            				</table>
+            			</div>
+            		</div>
+            	</div>
+            	<div class="project-info float-right">
+            		<header class="opacity-5">第一组项目</header>
+					<div class="project-detail">
+						<div class="">
+							<div class="opacity-5">标题</div>
+							<div class="">项目报表三</div>
+						</div>
+						<div id="detail-price-person" class="clearfix">
+							<div class="detail-price float-left">
+								<div class="opacity-5">价格</div>
+								<div class="">￥160</div>
+							</div>
+							<div class="detail-person float-left">
+								<div class="opacity-5">负责人</div>
+								<div class="">小A</div>
+							</div>
+						</div>
+						<div class="detail-info-main">
+							<div class="opacity-5">详细描述</div>
+							<div class="">该项目的负责人是......</div>
+						</div>
+						<div id="submit-info" class="clearfix">
+							<div class="float-left position-relative protocol-position">
+								<input class="checkbox-pseudo" type="checkbox" id="protocol" name="protocol">
+                				<label for="protocol"><span class="pseudo-position"></span><span class="opacity-5 abc">遵守保密协议</span></label>
+							
+							</div>
+							<button class="search-btn float-right">搜索</button>
+						</div>
+					</div>
+            	</div>
+            </section>
+
+
+            <section class="section-5">
+            	<div class="calendar float-left">
+            		<header class="opacity-5">日历</header>
+            	</div>
+            	<div class="car-range float-right">
+            		<header class="opacity-5">汽车行业品牌榜</header>
+            		<div class="car-sell-table">
+            			<table>
+            				<thead>
+            					<tr>
+            						<th>排名</th>
+            						<th>品牌</th>
+            						<th>搜索指数</th>
+            					</tr>
+            				</thead>
+            				<tbody>
+            					<tr>
+            						<td>1</td>
+            						<td>大众</td>
+            						<td><span>99999999</span><span class="car-line"><span class="line-1"></span></span></td>
+            					</tr>
+            				</tbody>
+            				<tbody>
+            					<tr>
+            						<td>2</td>
+            						<td>丰田</td>
+            						<td><span>88888888</span><span class="car-line"><span class="line-2"></span></span></td>
+            					</tr>
+            				</tbody>
+            				<tbody>
+            					<tr>
+            						<td>3</td>
+            						<td>奥迪</td>
+            						<td><span>78333334</span><span class="car-line"><span class="line-3"></span></span></td>
+            					</tr>
+            				</tbody>
+            				<tbody>
+            					<tr>
+            						<td>4</td>
+            						<td>本田</td>
+            						<td><span>66666666</span><span class="car-line"><span class="line-4"></span></span></td>
+            					</tr>
+            				</tbody>
+            				<tbody>
+            					<tr>
+            						<td>5</td>
+            						<td>福特</td>
+            						<td><span>56656556</span><span class="car-line"><span class="line-5"></span></span></td>
+            					</tr>
+            				</tbody>
+            				<tbody>
+            					<tr>
+            						<td>6</td>
+            						<td>宝马</td>
+            						<td><span>35345345</span><span class="car-line"><span class="line-6"></span></span></td>
+            					</tr>
+            				</tbody>
+            				<tbody>
+            					<tr>
+            						<td>7</td>
+            						<td>现代</td>
+            						<td><span>23434234</span><span class="car-line"><span class="line-7"></span></span></td>
+            					</tr>
+            				</tbody>
+            				<tbody>
+            					<tr>
+            						<td>8</td>
+            						<td>起亚</td>
+            						<td><span>21212122</span><span class="car-line"><span class="line-8"></span></span></td>
+            					</tr>
+            				</tbody>
+            				<tbody>
+            					<tr>
+            						<td>9</td>
+            						<td>奔驰</td>
+            						<td><span>15533434</span><span class="car-line"><span class="line-9"></span></span></td>
+            					</tr>
+            				</tbody>
+            				<tbody>
+            					<tr>
+            						<td>10</td>
+            						<td>别克</td>
+            						<td><span>10023232</span><span class="car-line"><span class="line-10"></span></span></td>
+            					</tr>
+            				</tbody>
+            			</table>
+            		</div>
+            	</div>
+            </section>
+        </article>
+    </main>
+</body>
+
+</html>
