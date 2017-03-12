@@ -9,7 +9,7 @@ body {
 	background-color: #fff;
 	color: #24292e;
 	min-width: 1280px;
-	font-family:sans-serif,Arial,PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei;
+	font-family:Arial,sans-serif,PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei;
 }
 .nav-left, .main-article {
 	height: 1266px;
@@ -180,6 +180,7 @@ ul {
 .nav-left ul ul {
 	 /*display: none; */
 }
+
 .nav-left ul li:hover > ul {
 	display: block;
 }
@@ -187,7 +188,9 @@ ul {
 	color: #fff;
 }
 
-
+.ul-level-1 > li:hover {
+	background-color: #374d61;
+}
 .ul-level-1 {
 	margin-left: -40px;
 }
@@ -202,6 +205,11 @@ ul {
 }
 .color-white {
 	color: white;
+}
+#angle-right {
+	margin-right: 4px;
+	position: relative;
+	left: -3px;
 }
 
 /*select fa-angle-right*/
@@ -308,6 +316,9 @@ label {
 input {
 	font-size: inherit;
 }
+#first-btn {
+	padding: 0 5px;
+}
 .control-label {
 	padding-right: 10px;
 	padding-top: 5px;
@@ -344,7 +355,7 @@ input {
 .form-control-feedback {
 	position: absolute;
 	top: 0.3em;
-	right: 0.5em;
+	right: 0.4em;
 }
 .search-btn {
 	letter-spacing: 2px;
@@ -394,6 +405,7 @@ input {
 .buy-line, .sell-line {
 	position: relative;
 	left: -5px;
+	top: 1px;
 	display: inline-block;
 	width: 1.4em;
 	height: 0.75em;
@@ -403,7 +415,7 @@ input {
 .sell-line {
 	border-top: 0;
 	border-bottom: 0.15em solid #c5bbbb;
-	top: -8px;
+	top: -7px;
 }
 /*the change word end*/
 
@@ -554,16 +566,20 @@ input {
 	height: inherit;
 }
 .project-detail {
-	margin: 20px 30px 15px 30px;
+	margin: 20px 0 15px 30px;
 	/*border: 2px solid #ccc;*/
 }
 .project-detail>div {
 	padding: 5px 0 5px 15px;
 	border-bottom: 1px solid #ccc;
 }
+.project-title, .detail-info-main, #submit-info {
+	margin-right: 30px;
+}
 .detail-price, .detail-person {
 	padding-top: 5px;
 	padding-bottom: 5px;
+	/* margin-right: -20px; */
 }
 .detail-price {
 	padding-right: 50px;
@@ -612,7 +628,7 @@ input {
 	border-bottom: 0.2em solid #594343;
 	transform: rotate(45deg);
 	position: absolute;
-	top: 0.1em;
+	top: 0;
 	left: 0.3em;
 }
 
@@ -634,7 +650,7 @@ input {
 }
 .project-btn button {border-bottom: 2px solid #ccc;}
 .project-btn button:first-child {
-	margin-left: -0.2px;
+	margin-left: -0.0px;
 	background-color: #fff;
 	border: 2px solid #ccc;
 	border-bottom: 1px solid #fff;
@@ -650,8 +666,10 @@ input {
 	line-height: 1.5;
 	text-align: center;
 	white-space: nowrap;
+	border: 1px solid #ccc;
 	vertical-align: middle;
 	cursor: pointer;
+	background-color: #fff;
 	border: 1px solid transparent;
 	border-radius: 4px;
 }
@@ -662,17 +680,74 @@ input {
 	border-radius: 2px;
 	background-color: #efebeb;
 }
+
+
+
+/*tab change use radio and label*/
+.project-container {
+	min-height: 300px;
+	margin-top: 35px;
+}
+
+.tab {
+	float: left;
+}
+.tab input {
+	display: none;
+}
+.tab label {
+	position: relative;
+	top: -35px;
+}
+.tab-content {
+	position: absolute;
+	top: 13.5px;
+	opacity: 0;
+	left: 20px;
+	width: 473.2px;
+	height: 275.4px;
+	/* bottom: 0; */
+	/* right: 0; */
+}
+
+.tab input:checked + label {
+	background-color: #fff;
+	border: 2px solid #ccc;
+	border-bottom: 2px solid #fff;
+	z-index: 2;
+}
+.tab input:checked + label + .tab-content {
+	opacity: 1;
+	z-index: 1;
+}
+
+
+
+
+
+.btn-active {
+	/* position: absolute; */
+	margin-bottom: -2.8px;
+	background-color: #fff;
+	border: 2px solid #ccc;
+	border-bottom: 2px solid #fff;
+}
+.project-1-btn {
+	position: relative;
+	margin-left: 0;
+}
+
 .project-table {
 	padding: 25px;
 }
 .project-table {
 	border: 2px solid #ccc;
 	border-radius: 3px;
-	/* z-index: 9999; */
-	/* overflow: visible; */
+	
 }
 .project-table {
-	margin-top: -1.5px;
+	/* margin-top: -3.5px; */
+	padding-bottom: 40px;
 }
 table {
 	border-collapse: collapse;
@@ -687,13 +762,8 @@ th, td {
 .project-table td:hover {
 	background-color: #e3e1e1;
 }
-.project-2 {
-	display: none;
-}
-.btn-2:hover .project-2 {
-	display: block;
-}
-/*section-4 project-table end*/
+
+/*section-4.project-table end*/
 
 
 
@@ -734,7 +804,6 @@ th, td {
 	position: absolute;
 	top: -2px;
 	left: -1px;
-	/* width: 200px; */
 	border-width: 2px;
 	border-style: solid;
 }
@@ -763,3 +832,147 @@ th, td {
 
  /*section-5 car-sell-table end*/
  
+
+
+ /*calenar start*/
+
+ .calendar-container {
+ 	margin: 0 10px;
+ 	font-size: 12px;
+ }
+ .calendar ul {
+ 	margin-left: -40px;
+ 	
+ }
+ .calendar-btn li {
+ 	height: 28px;
+ 	float: left;
+ 	font-size: inherit;
+ }
+ .btn-date {
+ 	border: 1.6px solid #ccc;
+ 	border-radius: 0;
+ 	margin-right: 6px;
+ 	padding: 0;
+ }
+ .arrow-down-wrap {
+ 	width: 20px;
+ 	height: 27px;
+ 	margin-top: -1px;
+ 	border: 1px solid #dbd7d7;
+ 	float: right;
+ }
+ .arrow-down {
+ 	width: 0;
+ 	height: 0;
+ 	position: absolute;
+ 	top: 9px;
+ 	right: 5px;
+ 	border-left: 4px solid transparent;
+ 	border-right: 4px solid transparent;
+ 	border-top: 6px solid #ccc;
+ }
+ .span-time {
+ 	padding: 0 6px;	
+ 	position: relative;
+ 	top: 3px;
+ }
+
+ .month-border-right {	
+ 	border-right: 1px solid #ccc;
+ 	height: 27px;
+ 	display: inline-block;
+ 	top: -2px;	
+ 	padding: 0 10px;
+ }
+ .month-position {
+ 	position: relative;
+ 	top: 5px;
+ }
+ .btn-border-right {
+ 	border-left: 0;
+ 	border-right: 1px solid #ccc;
+ }
+ .angle-right-wrap {
+ 	float: right;
+ 	position: relative;
+ 	width: 1.6em;
+ 	height: 2.1em;
+ }
+ .btn-angle-right {
+ 	position: absolute;
+ 	right: 6px;
+ 	top: 8px;
+ 	width: 0.6em;
+ 	height: 0.6em;
+ 	display: inline-block;
+ 	border-top: 0.15em solid #ccc;
+ 	border-right: 0.15em solid #ccc;
+ 	transform: rotate(45deg);
+ }
+ .angle-left-wrap {
+ 	float: left;
+ 	position: relative;
+ 	width: 1.6em;
+ 	height: 2.1em;
+ 	border-right: 1px solid #ccc;
+ }
+ .btn-angle-left {
+ 	position: absolute;
+ 	right: 6px;
+ 	top: 8px;
+ 	width: 0.6em;
+ 	height: 0.6em;
+ 	display: inline-block;
+ 	border-left: 0.15em solid #ccc;
+ 	border-bottom: 0.15em solid #ccc;
+ 	transform: rotate(45deg);
+ }
+ #return-today {
+ 	padding: 2.4px 4px;
+ 	margin-right: 0;
+ 	height: 28px;
+ 	font-size: inherit;
+ }
+ .calendar-btn {
+ 	border-bottom: 2px solid #8484e9;
+ 	margin-right: 9px;
+ }
+ 
+
+
+.calendar table {
+	/*border-collapse: separate;*/
+}
+ .calendar td, .calendar th {
+	border: 0;
+	text-align: center;
+	}
+ .calendar thead th {
+ 	font-weight: 500;
+ 	border-bottom: 2px solid #ccc;
+ 	
+ }
+ .date-border {
+ 	margin-top: -5px;
+ }
+  .calendar td, .date-border{
+  	cursor: pointer;
+  	width: 4em;
+  	height: 4em;
+  	padding: 0;
+  }
+  .date-border {
+  	margin-top: 1px;
+  	padding: 4px;
+  	border: 2px solid transparent;
+  }
+  .calendar td:hover>.date-border {
+  	border-color: #FBE902;
+  }
+  .holiday-color {
+  	color: red;
+  }
+  .border-active {
+  	border-color: #FBE902;
+  }

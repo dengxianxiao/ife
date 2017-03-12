@@ -43,7 +43,7 @@
                     <ul class="ul-level-2">
                         <li><span><i class="fa fa-angle-right" aria-hidden="true"></i><i id="fold" class="fa fa-folder" aria-hidden="true"></i>文件一</span>
                         </li>
-                        <li><span class="color-white"><i class="fa fa-angle-down" aria-hidden="true"></i><i id="fold" class="fa fa-folder" aria-hidden="true"></i>文件二</span>
+                        <li><span class="color-white"><i id="angle-right" class="fa fa-angle-down" aria-hidden="true"></i><i id="fold" class="fa fa-folder" aria-hidden="true"></i>文件二</span>
                             <ul>
                                 <li><span class="color-white"><i id="file" class="fa fa-file-text-o" aria-hidden="true"></i>文档一</li>
 								<li><span><i id="file" class="fa fa-file-text-o" aria-hidden="true"></i>文档二</li>
@@ -69,7 +69,7 @@
                         <div class="form-group">
                             <label class="col-md-1 control-label" for="search-item"><span class="opacity-5">查询项</span></label>
                             <div class="col-md-1">
-                            <input class="form-control" type="text" id="search-item" placeholder="第一项">
+                            <input id="first-btn" class="form-control" type="text" id="search-item" placeholder="第一项">
                             <span class="angle-down form-control-feedback"></span>
                             </div>
 
@@ -213,61 +213,224 @@
             <section class="section-4">
             	<div class="project float-left">
             		<header class="opacity-5">第一组项目</header>
-            		<div class="project-container">
-            			<div class="project-btn">
-            				<button class="btn btn-default">项目一</button>
-            				<button class="btn btn-default">项目二</button>
-            				<button class="btn btn-default">项目三</button>
-            				<button class="btn btn-default">项目四</button>
-            				<button class="btn btn-default">项目五</button>
-            			</div>
-            			<div class="project-table">
-            				<div class="project-2">project-2</div>
-            				<table>
-            					<tr>
-            						<td>购买材料一</td>
-            						<td>购买材料一</td>
-            						<td>购买材料一</td>
-            						<td>购买材料一</td>
-            					</tr>
-            					<tr>
-            						<td>购买材料十一</td>
-            						<td>购买材料十一</td>
-            						<td>购买材料十一</td>
-            						<td>购买材料十一</td>
-            					</tr>
-            					<tr>
-            						<td>购买材料十三</td>
-            						<td>购买材料十三</td>
-            						<td>购买材料十三</td>
-            						<td>购买材料十三</td>
-            					</tr>
-            					<tr>
-            						<td>购买材料三十一</td>
-            						<td>购买材料三十一</td>
-            						<td>购买材料三十一</td>
-            						<td>购买材料三十一</td>
-            					</tr>
-            					<tr>
-            						<td>购买材料二十五</td>
-            						<td>购买材料二十五</td>
-            						<td>购买材料二十五</td>
-            						<td>购买材料二十五</td>
-            					</tr>
-            					<tr>
-            						<td>购买材料一</td>
-            						<td>购买材料一</td>
-            						<td>购买材料一</td>
-            						<td>购买材料一</td>
-            					</tr>
-            				</table>
-            			</div>
+            		<div class="project-container position-relative clearfix">
+            			
+                 
+
+                        <div class="tab">
+                            <input type="radio" id="project-1" name="project" checked>
+                            <label for="project-1" class="btn btn-default project-1-btn">项目一</label>
+                            <div class="tab-content project-table">
+                                <table>
+                                <tr>
+                                    <td>购买材料一</td>
+                                    <td>购买材料一</td>
+                                    <td>购买材料一</td>
+                                    <td>购买材料一</td>
+                                </tr>
+                                <tr>
+                                    <td>购买材料十一</td>
+                                    <td>购买材料十一</td>
+                                    <td>购买材料十一</td>
+                                    <td>购买材料十一</td>
+                                </tr>
+                                <tr>
+                                    <td>购买材料十三</td>
+                                    <td>购买材料十三</td>
+                                    <td>购买材料十三</td>
+                                    <td>购买材料十三</td>
+                                </tr>
+                                <tr>
+                                    <td>购买材料三十一</td>
+                                    <td>购买材料三十一</td>
+                                    <td>购买材料三十一</td>
+                                    <td>购买材料三十一</td>
+                                </tr>
+                                <tr>
+                                    <td>购买材料二十五</td>
+                                    <td>购买材料二十五</td>
+                                    <td>购买材料二十五</td>
+                                    <td>购买材料二十五</td>
+                                </tr>
+                                <tr>
+                                    <td>购买材料一</td>
+                                    <td>购买材料一</td>
+                                    <td>购买材料一</td>
+                                    <td>购买材料一</td>
+                                </tr>
+                            </table>
+                            </div>
+                        </div>
+                        <div class="tab">
+                            <input type="radio" id="project-2" name="project">
+                            <label for="project-2" class="btn btn-default">项目二</label>
+                            <div class="tab-content  project-table">
+                                 <table>
+                                <tr>
+                                    <td>购买材料一</td>
+                                    <td>购买材料一</td>
+                                    <td>购买材料一</td>
+                                    <td>购买材料一</td>
+                                </tr>
+                                <tr>
+                                    <td>购买材料十一</td>
+                                    <td>购买材料十一</td>
+                                    <td>购买材料十一</td>
+                                    <td>购买材料十一</td>
+                                </tr>
+                                <tr>
+                                    <td>购买材料十三</td>
+                                    <td>购买材料十三</td>
+                                    <td>购买材料十三</td>
+                                    <td>购买材料十三</td>
+                                </tr>
+                                <tr>
+                                    <td>购买材料三十一</td>
+                                    <td>购买材料三十一</td>
+                                    <td>购买材料三十一</td>
+                                    <td>购买材料三十一</td>
+                                </tr>
+                                <tr>
+                                    <td>购买材料二十五</td>
+                                    <td>购买材料二十五</td>
+                                    <td>购买材料二十五</td>
+                                    <td>购买材料二十五</td>
+                                </tr>
+                                
+                            </table>
+                            </div>
+                        </div>
+                        <div class="tab">
+                            <input type="radio" id="project-3" name="project">
+                            <label for="project-3" class="btn btn-default">项目三</label>
+                            <div class="tab-content  project-table">
+                                 <table>
+                                <tr>
+                                    <td>购买材料一</td>
+                                    <td>购买材料一</td>
+                                    <td>购买材料一</td>
+                                    <td>购买材料一</td>
+                                </tr>
+                                <tr>
+                                    <td>购买材料十一</td>
+                                    <td>购买材料十一</td>
+                                    <td>购买材料十一</td>
+                                    <td>购买材料十一</td>
+                                </tr>
+                                <tr>
+                                    <td>购买材料十三</td>
+                                    <td>购买材料十三</td>
+                                    <td>购买材料十三</td>
+                                    <td>购买材料十三</td>
+                                </tr>
+                                <tr>
+                                    <td>购买材料三十一</td>
+                                    <td>购买材料三十一</td>
+                                    <td>购买材料三十一</td>
+                                    <td>购买材料三十一</td>
+                                </tr>
+                                <tr>
+                                    <td>购买材料二十五</td>
+                                    <td>购买材料二十五</td>
+                                    <td>购买材料二十五</td>
+                                    <td>购买材料二十五</td>
+                                </tr>
+                                <tr>
+                                    <td>购买材料十三</td>
+                                    <td>购买材料十三</td>
+                                    <td>购买材料十三</td>
+                                    <td>购买材料十三</td>
+                                </tr>
+                                
+                            </table>
+                            </div>
+                        </div>
+                        <div class="tab">
+                            <input type="radio" id="project-4" name="project">
+                            <label for="project-4" class="btn btn-default">项目四</label>
+                            <div class="tab-content  project-table">
+                                 <table>
+                                <tr>
+                                    <td>购买材料一</td>
+                                    <td>购买材料一</td>
+                                    <td>购买材料一</td>
+                                    <td>购买材料一</td>
+                                </tr>
+                                <tr>
+                                    <td>购买材料十一</td>
+                                    <td>购买材料十一</td>
+                                    <td>购买材料十一</td>
+                                    <td>购买材料十一</td>
+                                </tr>
+                                <tr>
+                                    <td>购买材料十三</td>
+                                    <td>购买材料十三</td>
+                                    <td>购买材料十三</td>
+                                    <td>购买材料十三</td>
+                                </tr>
+                                <tr>
+                                    <td>购买材料三十一</td>
+                                    <td>购买材料三十一</td>
+                                    <td>购买材料三十一</td>
+                                    <td>购买材料三十一</td>
+                                </tr>
+                                <tr>
+                                    <td>购买材料二十五</td>
+                                    <td>购买材料二十五</td>
+                                    <td>购买材料二十五</td>
+                                    <td>购买材料二十五</td>
+                                </tr>
+                                 <tr>
+                                    <td>购买材料二十五</td>
+                                    <td>购买材料二十五</td>
+                                    <td>购买材料二十五</td>
+                                    <td>购买材料二十五</td>
+                                </tr>
+                                
+                            </table>
+                            </div>
+                        </div>
+                        <div class="tab">
+                            <input type="radio" id="project-5" name="project">
+                            <label for="project-5" class="btn btn-default">项目五</label>
+                            <div class="tab-content  project-table">
+                                 <table>
+                                <tr>
+                                    <td>购买材料一</td>
+                                    <td>购买材料一</td>
+                                    <td>购买材料一</td>
+                                    <td>购买材料一</td>
+                                </tr>
+                                <tr>
+                                    <td>购买材料十一</td>
+                                    <td>购买材料十一</td>
+                                    <td>购买材料十一</td>
+                                    <td>购买材料十一</td>
+                                </tr>
+                                <tr>
+                                    <td>购买材料十三</td>
+                                    <td>购买材料十三</td>
+                                    <td>购买材料十三</td>
+                                    <td>购买材料十三</td>
+                                </tr>
+                                <tr>
+                                    <td>购买材料三十一</td>
+                                    <td>购买材料三十一</td>
+                                    <td>购买材料三十一</td>
+                                    <td>购买材料三十一</td>
+                                </tr>
+                               
+                                
+                            </table>
+                            </div>
+                        </div>
+            			
             		</div>
             	</div>
             	<div class="project-info float-right">
             		<header class="opacity-5">第一组项目</header>
 					<div class="project-detail">
-						<div class="">
+						<div class="project-title">
 							<div class="opacity-5">标题</div>
 							<div class="">项目报表三</div>
 						</div>
@@ -277,8 +440,10 @@
 								<div class="">￥160</div>
 							</div>
 							<div class="detail-person float-left">
+                            
 								<div class="opacity-5">负责人</div>
 								<div class="">小A</div>
+                            
 							</div>
 						</div>
 						<div class="detail-info-main">
@@ -301,7 +466,121 @@
             <section class="section-5">
             	<div class="calendar float-left">
             		<header class="opacity-5">日历</header>
+                    <div class="calendar-container">
+                        <div class="calendar-btn">
+                        <ul class="clearfix position-relative">
+                            <li class="btn btn-date"><span class="span-time">2017年</span><div class="arrow-down-wrap position-relative"><span class="arrow-down"></span></div></li>
+                            <li class="btn btn-date btn-month position-relative">
+                                <div class="angle-left-wrap"><span class="btn-angle-left"></span></div>
+                                <div class="span-time month-border-right"><span class="month-position">3月</span></div>
+                                <div class="angle-right-wrap"><span class="btn-angle-right"></span></div>
+                                <div class="arrow-down-wrap btn-border-right position-relative"><span class="arrow-down"></span></div>
+                            </li>
+                            <li class="btn btn-date"><span class="span-time">标注日期</span><div class="arrow-down-wrap position-relative"><span class="arrow-down"></span></div></li>
+                            <li class=""><a id="return-today" class="btn btn-date">返回今天</a></li>
+                        </ul>
+                       </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>一</th>
+                                    <th>二</th>
+                                    <th>三</th>
+                                    <th>四</th>
+                                    <th>五</th>
+                                    <th>六</th>
+                                    <th>日</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><div class="date-border"><div class="new-calendar"></div>
+                                    <div class="old-calendar"></div></div></td>
+                                    <td><div class="date-border"><div class="new-calendar"></div>
+                                    <div class="old-calendar"></div></div></td>
+                                    <td><div class="date-border"><div class="new-calendar">1</div>
+                                    <div class="old-calendar">初四</div></div></td>
+                                    <td><div class="date-border"><div class="new-calendar">2</div>
+                                    <div class="old-calendar">初五</div></div></td>
+                                    <td><div class="date-border"><div class="new-calendar">3</div>
+                                    <div class="old-calendar">初六</div></div></td>
+                                    <td><div class="date-border"><div class="new-calendar holiday-color">4</div>
+                                    <div class="old-calendar">初七</div></div></td>
+                                    <td><div class="date-border"><div class="new-calendar holiday-color">5</div>
+                                    <div class="old-calendar">惊蛰</div></div></td>
+                                </tr>
+                                <tr>
+                                    <td><div class="date-border"><div class="new-calendar">6</div>
+                                    <div class="old-calendar">初九</div></div></td>
+                                    <td><div class="date-border"><div class="new-calendar">7</div>
+                                    <div class="old-calendar">初十</div></div></td>
+                                    <td><div class="date-border"><div class="new-calendar">8</div>
+                                    <div class="old-calendar holiday-color">妇女节</div></div></td>
+                                    <td><div class="date-border"><div class="new-calendar">9</div>
+                                    <div class="old-calendar">十二</div></div></td>
+                                    <td><div class="date-border"><div class="new-calendar">10</div>
+                                    <div class="old-calendar">十三</div></div></td>
+                                    <td><div class="date-border"><div class="new-calendar holiday-color">11</div>
+                                    <div class="old-calendar">十四</div></div></td>
+                                    <td><div class="date-border"><div class="new-calendar holiday-color">12</div>
+                                    <div class="old-calendar holiday-color">植树节</div></div></td>
+                                </tr>
+                                <tr>
+                                    <td><div class="date-border"><div class="new-calendar">13</div>
+                                    <div class="old-calendar">十六</div></div></td>
+                                    <td><div class="date-border"><div class="new-calendar">14</div>
+                                    <div class="old-calendar">十七</div></div></td>
+                                    <td><div class="date-border"><div class="new-calendar">15</div>
+                                    <div class="old-calendar holiday-color">消权日</div></div></td>
+                                    <td><div class="date-border"><div class="new-calendar">16</div>
+                                    <div class="old-calendar">十九</div></div></td>
+                                    <td><div class="date-border border-active"><div class="new-calendar">17</div>
+                                    <div class="old-calendar">廿十</div></div></td>
+                                    <td><div class="date-border"><div class="new-calendar holiday-color">18</div>
+                                    <div class="old-calendar">廿一</div></div></td>
+                                    <td><div class="date-border"><div class="new-calendar holiday-color">19</div>
+                                    <div class="old-calendar">廿二</div></div></td>
+                                </tr>
+                                <tr>
+                                    <td><div class="date-border"><div class="new-calendar">20</div>
+                                    <div class="old-calendar">廿三</div></div></td>
+                                    <td><div class="date-border"><div class="new-calendar">21</div>
+                                    <div class="old-calendar">廿四</div></div></td>
+                                    <td><div class="date-border"><div class="new-calendar">22</div>
+                                    <div class="old-calendar">廿五</div></div></td>
+                                    <td><div class="date-border"><div class="new-calendar">23</div>
+                                    <div class="old-calendar">廿六</div></div></td>
+                                    <td><div class="date-border border-active"><div class="new-calendar">24</div>
+                                    <div class="old-calendar">廿七</div></div></td>
+                                    <td><div class="date-border"><div class="new-calendar holiday-color">25</div>
+                                    <div class="old-calendar">廿八</div></div></td>
+                                    <td><div class="date-border"><div class="new-calendar holiday-color">26</div>
+                                    <div class="old-calendar">廿九</div></div></td>
+                                </tr>
+                                <tr>
+                                    <td><div class="date-border"><div class="new-calendar">27</div>
+                                    <div class="old-calendar">三十</div></div></td>
+                                    <td><div class="date-border"><div class="new-calendar">28</div>
+                                    <div class="old-calendar">三月</div></div></td>
+                                    <td><div class="date-border"><div class="new-calendar">29</div>
+                                    <div class="old-calendar">初二</div></div></td>
+                                    <td><div class="date-border"><div class="new-calendar">30</div>
+                                    <div class="old-calendar">初三</div></div></td>
+                                    <td><div class="date-border"><div class="new-calendar">31</div>
+                                    <div class="old-calendar">初四</div></div></td>
+                                    <td><div class="date-border"><div class="new-calendar holiday-color"></div>
+                                    <div class="old-calendar"></div></div></td>
+                                    <td><div class="date-border"><div class="new-calendar holiday-color"></div>
+                                    <div class="old-calendar"></div></div></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
             	</div>
+
+
+
             	<div class="car-range float-right">
             		<header class="opacity-5">汽车行业品牌榜</header>
             		<div class="car-sell-table">

@@ -1,0 +1,163 @@
+body {
+   background: #999;  
+   padding: 20px 40px; 
+}
+
+.tab-container {
+  position: relative;   
+  min-height: 200px; 
+  clear: both;
+  margin: 35px 0 25px;
+  background: white;
+}
+.tab {
+  float: left;
+   
+}
+.tab label {
+  background: #eee; 
+  padding: 10px; 
+  border: 1px solid #ccc; 
+  margin-left: -1px; 
+  position: relative;
+  left: 1px; 
+  top: -29px;
+}
+.tab input {
+  display: none;   
+}
+.content {
+  position: absolute;
+  top: -1px;
+  left: 0;
+  background: white;
+  right: 0;
+  bottom: 0;
+  padding: 20px;
+  border: 1px solid #ccc;
+  /* -webkit-transition: opacity .6s linear; */
+  opacity: 0;
+}
+.tab input:checked + label {
+  background: white;
+  border-bottom: 1px solid white;
+  z-index: 2;
+}
+.tab input:checked + label + .content {
+  z-index: 1;
+  opacity: 1;
+}
+
+
+/*#ie-test {
+	position: relative;
+	width: 100%;
+}
+#boxLinks {
+	list-style: none;
+	overflow: hidden;
+}
+.group:after {
+	visibility: hidden;
+	display: block;
+	font-size: 0;
+	content: " ";
+	clear: both;
+	height: 0;
+}
+#boxLinks li {
+	display: inline;
+}
+#boxLinks a {
+	padding: 5px 10px;
+	color: black;
+	text-decoration: none;
+	border: 1px solid #ccc;
+	float: left;
+	display: block;
+	margin-left: -1px;
+	position: relative;
+	left: 1px;
+}
+#box {
+	height: 250px;
+	border: 1px solid #ccc;
+	overflow: hidden;
+	padding: 0 30px;
+	position: relative;
+	top: -1;
+}
+#box1:target,
+#box2:target,
+#box3:target {
+	display: block;
+}
+.box {
+	display: none;
+	height: 250px;
+	overflow: auto;
+	display: block;
+	position: relative;
+	overflow-x: hidden;
+}*/
+
+
+
+
+
+
+
+
+
+
+/*
+body {
+   background: #999;  
+   padding: 20px 40px; 
+}
+
+.tabs {
+  position: relative;   
+  min-height: 200px; 
+  clear: both;
+  margin: 35px 0 25px;
+  background: white;
+}
+.tab {
+  float: left;
+   
+}
+.tab label {
+  background: #eee; 
+  padding: 10px; 
+  border: 1px solid #ccc; 
+  margin-left: -1px; 
+  position: relative;
+  left: 1px; 
+  top: -29px;
+  -webkit-transition: background-color .17s linear;
+}
+.tab [type=radio] {
+  display: none;   
+}
+.content {
+  position: absolute;
+  top: -1px;
+  left: 0;
+  background: white;
+  right: 0;
+  bottom: 0;
+  padding: 20px;
+  border: 1px solid #ccc; 
+  -webkit-transition: opacity .6s linear;
+  opacity: 0;
+}
+[type=radio]:checked ~ label {
+  background: white;
+  border-bottom: 1px solid white;
+  z-index: 2;
+}
+[type=radio]:checked ~ label ~ .content {
+  z-index: 1;
+  opacity: 1;
+}*/
