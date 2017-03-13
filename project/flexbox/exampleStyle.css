@@ -1,0 +1,22 @@
+* {
+	box-sizing: border-box;
+}
+body {
+	margin: 0;
+}
+.container {
+	height: 700px;
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: space-between;
+	background-color: #eee;
+}
+ul {
+	list-style: none;
+}
+[class*="item"] {
+	width: 100px;
+	height: 100px;
+	
+	background-color: #ccc;
+}
