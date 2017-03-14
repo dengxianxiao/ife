@@ -1,0 +1,268 @@
+* {
+	box-sizing: border-box;
+}
+body {
+	margin: 0;
+	font-size: 16px;
+	font-family:"Microsoft YaHei","Helvetica Neue",Helvetica,STHeiTi,Arial,sans-serif;
+	line-height: 1.42;
+}
+a {
+	text-decoration: none;
+}
+.nav-title {
+	background-color: #36cae0;
+	padding: 12px;
+	color: #fff;
+}
+.position-relative {
+	position: relative !important;
+}
+.return-btn {
+	font-size: 1.2rem;
+	float: left;
+	color: inherit;
+	position: absolute;
+	margin-top: 2px;
+}
+@media (max-width: 380px) {
+	.return-btn {
+		font-size: 1rem;
+	}
+}
+
+.return-icon {
+	display: inline-block;
+	width: 0.9rem;
+	height: 0.9rem;
+	border-left: 0.2rem solid #fff;
+	border-bottom: 0.2rem solid #fff;
+	transform: rotate(45deg);
+}
+.return-name {
+	margin-left: -0.3rem;
+	position: relative;
+	bottom: 0.5px;
+}
+.nav-title header {
+	text-align: center;
+}
+.title {
+	font-size: 1.375rem;
+}
+@media (max-width: 380px) {
+	.title {
+		font-size: 1.2rem;
+	}
+}
+.nav-list, .label-list {
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-around;
+	
+}
+.nav-link {
+	padding: 16px;
+}
+.nav-link-active {
+	border-bottom: 3px solid #36cae0;
+}
+.img-response {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+.main-img {
+	width: 100%;
+	height: 250px;
+}
+.main-img img {
+	height: 250px;
+}
+.label-list {
+	margin: 10px 20px 0 20px;
+	border-bottom: 2px solid #ddd;
+}
+.label-icon {
+	width: 50px;
+	height: 50px;
+	border-radius: 25px;
+	background-color: #36cae0;
+	color: #fff;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.label-name {
+	display: block;
+	text-align: center;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+.column-list {
+	text-align: center;
+	padding: 20px 0;
+}
+.column-list>div {
+	display: inline-block;
+	text-align: left;
+}
+.border-left-right {
+	border-left: 2px solid #ccc;
+	border-right: 2px solid #ccc;
+}
+.column-list,.module-1-info {
+	border-bottom: 12px solid #eee;
+}
+.column {
+	padding: 10px;
+}
+@media (max-width: 360px) {
+	.column {
+	padding: 0;
+}
+}
+.column-img {
+	width: 100px;
+	height: 100px;
+}
+.column-title, .column-name {
+	display: block;
+	text-align: center;
+}
+.column-title {
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+.column-name {
+	
+}
+
+.module-1-info {
+	padding: 6px 10px 10px 0;
+}
+.module-1>header {
+	margin: 20px 20px 0 20px;
+	padding-bottom: 10px;
+	border-bottom: 2px solid #eee;
+}
+.module-1 img {
+	width: 100px;
+	height: 100px;
+	margin: 10px 0 10px 10px;
+	/* margin-top: 10px; */
+}
+.content-wrap {
+	display: flex;
+	flex-flow: row nowrap;
+	border-bottom: 10px;
+}
+.clearfix:before {
+	display: table;
+	content: "";
+}
+.clearfix:after {
+	display: block;
+	content: "";
+	clear: both;
+}
+.float-left {
+	/* float: left; */
+}
+.float-right {
+	/* float: right; */
+}
+.content>div {
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-around;
+	text-align: center;
+}
+.content>div>div {
+	padding: 0.5rem;
+}
+.content span {
+	padding: 0.8rem 2rem;
+	display: inline-block;
+	text-align: left;
+	background-color: #ddd;
+}
+@media (max-width: 380px) {
+	body {
+		font-size: 14px;
+	}
+	.content span {
+		padding-left: 1.5rem;
+		padding-right: 1.5rem;
+	}
+}
+@media (max-width: 330px) {
+	body {
+		font-size: 14px;
+	}
+	.content span {
+		padding-left: 0.8rem;
+		padding-right: 0.8rem;
+	}
+}
+.article-list {
+	/* padding: 10px 15px; */
+	border-bottom: 2px solid #eee;
+}
+.article-list img {
+	width: 7rem;
+	height: 100px;
+	margin-right: 10px;
+}
+@media (max-width: 380px) {
+	.article-list img {font-size: 555px;}
+}
+.article-info {
+	position: relative;
+}
+.article-from-time {
+	position: absolute;
+	left: 0; bottom: 0;
+	opacity: 0.5;
+}
+.article-from {
+	padding-right: 5px;
+}
+.article-1 {
+	display: flex;
+	flex-flow: row nowrap;
+	padding: 20px;
+	border-bottom: 2px solid #eee;
+}
+.img-list {
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-around;
+}
+.article-3 {
+	padding: 20px;
+}
+.article-3 img {
+	width: 110px;
+	height: 100px;
+	margin-right: 0;
+}
+@media (max-width: 380px) {
+	.article-list img {
+		width: 100px;
+	}
+}
+@media (max-width: 320px) {
+	.article-list img {
+		width: 90px;
+		height: 90px;
+	}
+}
+.article-3 header {
+	/* padding: 15px; */
+	padding-bottom: 10px;
+}
+.article-detail {
+	opacity: 0.5;
+	margin: 10px 0;
+}
