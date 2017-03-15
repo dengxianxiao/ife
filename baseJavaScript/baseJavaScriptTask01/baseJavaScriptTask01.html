@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript Task 01</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="form-group">
+            <label for="aqi-input">请输入广州今天空气质量</label>
+            <input class="form-control" id="aqi-input" type="text">
+            <button class="btn" id="button">确认填写</button>
+        </div>
+        <div class="result clearfix">
+            <div class="info">您输入的值是</div>
+            <div class="result-info">
+                <span id="aqi-display">尚无录入</span>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+    (function() {
+        /*    
+        在注释下方写下代码
+        给按钮button绑定一个点击事件
+        在事件处理函数中
+        获取aqi-input输入的值，并显示在aqi-display中
+        */
+        let event = document.querySelector('#button');
+        event.addEventListener('click', () => {
+            let inputValue = document.getElementById('aqi-input').value;
+            document.getElementById('aqi-display').innerHTML = inputValue;
+        });
+
+
+    })();
+    </script>
+</body>
+
+</html>
