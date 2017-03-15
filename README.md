@@ -42,5 +42,9 @@
 <br><br>
 
 ###mobileWebPage &emsp; 2017.3.14
-&emsp;任务十一：任务十一：移动Web页面布局实践
+&emsp;任务十一：移动Web页面布局实践
+<br><br>
+
+###CSS3NewFeature &emsp; 2017.3.15
+&emsp;任务十二：学习CSS 3的新特性
 <br><br>

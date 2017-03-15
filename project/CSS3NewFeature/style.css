@@ -1,0 +1,205 @@
+* {
+	box-sizing: border-box;
+}
+
+main {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: space-around;
+}
+
+/*background change animation start*/
+@keyframes bgcChange {
+	from {width: 0;}
+	to {width: 300px;}
+}
+.div-BGC {
+	width:0;
+	height:100px;
+	background:blue;
+	transition:width 5s;
+	animation: bgcChange 5s ease-in-out infinite alternate;
+	position: absolute;
+	left: 0;
+	z-index: 0;
+}
+
+.container {
+	position: relative;
+	width: 300px;
+	height: 100px;
+	background-color: green;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+}
+
+.div-content {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	align-items: flex-end;
+	z-index: 1;
+}
+.div-content>div {
+	width: 30px;
+	height: 30px;
+	margin-left: 2px;
+	color: #fff;
+	background-color: #d5cece;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+/*background change animation end*/
+
+
+/*input change start*/
+@keyframes input-change-active {
+	0% {width: 50px;
+		height: 20px;}
+	50% {
+		margin-top: 120px;
+		width:250px;
+		height: 34px;
+		border-radius: 5px;
+		box-shadow: inset 0 0 10px #ccc7c5, 0 0 10px #9494a3;
+	}
+	100% {
+		margin-top: 270px;
+		width: 50px;
+		height: 20px;
+	}
+}
+
+.input-change {
+	width: 300px;
+	height: 300px;
+	border: 2px solid #ccc;
+	border-radius: 10px;
+	text-align: center;
+}
+#input-example {
+	transition: width 10s;
+	animation: input-change-active linear 10s infinite alternate;
+}
+/*input example end*/
+
+
+/*windmill start*/
+.windmill {
+	width: 300px;
+	height: 300px;
+	position: relative;
+	border: 2px solid #ccc;
+	border-radius: 10px;
+}
+.windmill-base {
+  border-bottom: 10px solid #ccc;
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	height: 0;
+	width: 20px;
+	position: absolute;
+  left: 130px;
+  bottom: 0;
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+}
+.windmill-body {
+  z-index: -1;
+  width: 8px;
+  height: 200px;
+  background: #ccc;
+  border-radius: 5px / 70px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  position: absolute;
+  left: 136.5px;
+  bottom: 5px;
+}
+.windmill-wing1 {
+	width: 8px;
+	height: 120px;
+	background: #ccc;
+	border-radius: 4px / 60px;
+	position: absolute;
+	left: 137px;
+	top: 30px;
+	transform:rotate(30deg);
+	animation: wind-1 5s infinite linear;
+}
+.windmill-wing2 {
+	width: 8px;
+	height: 120px;
+	background: #ccc;
+	border-radius: 4px / 60px;
+	position: absolute;
+	left: 137px;
+	top: 30px;
+	transform:rotate(120deg);
+	animation: wind-2 5s infinite linear;
+}
+.windmill-wing1 {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 1;
+}
+.windmill-wing1 .dot {
+	width: 0;
+	height: 0;
+	z-index: 5;
+	/* background-color: #000; */
+	border: 3px solid #807272;
+	border-radius: 2px;
+}
+
+@keyframes wind-1 {
+  0% {
+    transform: rotate(30deg);
+  }
+  
+  100% { 
+    transform: rotate(390deg);
+  }}
+@keyframes wind-2 {
+  0% {
+    transform: rotate(120deg);
+  }
+  
+  100% { 
+    transform: rotate(480deg);
+  }}
+/*windmill end*/
+
+
+/*table example start*/
+.table-example {
+	width: 300px;
+	height: 300px;
+	border: 2px solid #ccc;
+	border-radius: 10px;
+	
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+table {
+	border-collapse: collapse;
+}
+thead {
+	text-align: left;
+	background-color: #222;
+	color: #fff;
+	font-weight: 500;
+}
+th, td {
+	border: 2px solid #fff;
+}
+tr:nth-child(even) {
+	background-color: #c5c0c0;
+}
+.font-color-red {
+	color: red;
+}
