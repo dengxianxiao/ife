@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Base JavaScript Task 04</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+    <main class="container">
+        <div class="input-wrapper">
+            <div class="form-group">
+                <label for="input-example"></label>
+                <input type="text" class="form-control" id="input-example">
+            </div>
+            <div class="btn-wrapper">
+                <button id="btn-left-in" class="btn btn-default">左侧入</button>
+                <button id="btn-right-in" class="btn btn-default">右侧入</button>
+                <button id="btn-left-out" class="btn btn-default">左侧出</button>
+                <button id="btn-right-out" class="btn btn-default">右侧出</button>
+            </div>
+        </div>
+        <div class="result position-relative">
+            <ul id="result-ul">
+               
+            </ul>        
+        </div>
+
+
+        <div id="modal-dialog" class="modal-dialog modalDisplay">
+        	<div class="modal-content position-relative">
+        		<header class="modal-header">提示：
+					<a href="#" id="close-x" class="close-x">x</a>
+        		</header>
+        		<div id="modal-value" class="modal-body">
+        			输入的值为：<span class="modal-value">123</span>
+        		</div>
+        		<div class="modal-footer">
+        			<button id="close-btn" class="btn close-modal">关闭</button>
+        		</div>
+        	</div>
+        </div>
+
+
+    </main>
+    <script type="text/javascript">
+    function createInputElement() {
+        let inputValue = document.getElementById('input-example').value;
+        //判断输入值是否为数字      
+        if(isNaN(inputValue) || inputValue === "") {
+        	modalDisplay('modal-dialog', '只能输入数字');
+        	return false;
+        }
+        let li = document.createElement('li');
+        li.innerHTML = inputValue;
+        return li;
+    }
+
+    (function() {
+        let resultUl = document.getElementById('result-ul');
+        let hasChild = resultUl.getElementsByTagName('li');
+        //左输入按钮
+        let btnLeftIn = document.getElementById('btn-left-in');
+        btnLeftIn.addEventListener('click', () => {
+            let li = createInputElement();
+            resultUl.insertBefore(li, resultUl.firstChild);
+        });
+
+        //右输入按钮
+        let btnRightIn = document.getElementById('btn-right-in');
+        btnRightIn.addEventListener('click', () => {
+        	let li = createInputElement();
+        	resultUl.appendChild(li);
+        });
+
+        //左删除按钮
+        let btnLeftOut = document.getElementById('btn-left-out');
+        btnLeftOut.addEventListener('click', () => {
+        	//判断是否还有子节点
+        	if (hasChild.length > 0) {
+        		let oldChild = resultUl.removeChild(resultUl.firstChild);
+        		modalDisplay('modal-dialog', '删除数据：' + oldChild.innerHTML);
+	        } else {
+	        	modalDisplay('modal-dialog', '已经没有数据了');
+	        }
+        	
+        	
+        });
+
+        //右删除按钮
+        let btnRightOut = document.getElementById('btn-right-out');
+        btnRightOut.addEventListener('click', () => {   
+        	//判断是否还有子节点    	
+        	if (hasChild.length > 0) {
+        		let oldChild = resultUl.removeChild(resultUl.lastChild);
+        		modalDisplay('modal-dialog', '删除数据：' + oldChild.innerHTML);
+        	} else {
+        		modalDisplay('modal-dialog', '已经没有数据了');
+        	}
+        	
+        });
+    })();
+
+
+    let closeBtn = document.getElementById('close-btn');
+    closeBtn.addEventListener('click' ,() => modalHidden('modal-dialog'));
+    let closeX = document.getElementById('close-x');
+    closeX.addEventListener('click' ,() => modalHidden('modal-dialog'));
+
+
+    function modalHidden(targetId) {
+    	document.getElementById(targetId).style.display = 'none';
+    }
+    function modalDisplay(targetId, value) {
+    	document.getElementById('modal-value').innerHTML = value;
+    	document.getElementById(targetId).style.display = 'block';  	
+    	
+    }
+    </script>
+</body>
+
+</html>
