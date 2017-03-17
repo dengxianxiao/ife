@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Base JavaScript Task 05</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+    <main class="container">
+        <div class="input-wrapper">
+            <div class="form-group">
+                <label for="input-example"></label>
+                <input type="text" class="form-control" id="input-example">
+            </div>
+            <div class="btn-wrapper">
+                <button id="btn-left-in" class="btn btn-default">左侧入</button>
+                <button id="btn-right-in" class="btn btn-default">右侧入</button>
+                <button id="btn-left-out" class="btn btn-default">左侧出</button>
+                <button id="btn-right-out" class="btn btn-default">右侧出</button>
+            </div>
+        </div>
+        <div class="result position-relative">
+            <ul id="result-ul">
+                <li style="height: 100px">50</li>
+                <li style="height: 70px">20</li>
+                <li style="height: 80px">30</li>
+                <li style="height: 130px">80</li>
+            </ul>
+        </div>
+        <div>
+            <button id="bubbleSort-btn" class="btn btn-default">冒泡排序</button>
+        </div>
+        <div id="modal-dialog" class="modal-dialog modalDisplay">
+            <div class="modal-content position-relative">
+                <header class="modal-header">提示：
+                    <a href="#" id="close-x" class="close-x">x</a>
+                </header>
+                <div id="modal-value" class="modal-body">
+                    输入的值为：<span class="modal-value">123</span>
+                </div>
+                <div class="modal-footer">
+                    <button id="close-btn" class="btn close-modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script type="text/javascript">
+    let bubbleSortBtn = document.getElementById('bubbleSort-btn');
+    bubbleSortBtn.onclick = function() {
+        let resultUl = document.getElementById('result-ul');
+        let arr = resultUl.getElementsByTagName('li');
+        let arrValue = Array.from(arr).map((a) => Number(a.innerHTML));
+       
+        for (let i = 0; i < arrValue.length - 1; i++) {
+            for (let j = 0; j < arrValue.length - i - 1; j++) {
+                if (arrValue[j] > arrValue[j + 1]) {
+
+                    arr[j].style.height = arrValue[j + 1] + 50 + 'px';
+                    arr[j].innerHTML = arrValue[j + 1];
+                    arr[j + 1].style.height = arrValue[j] + 50 + 'px';
+                    arr[j + 1].innerHTML = arrValue[j];
+                    
+                    let temp = arrValue[j];
+                    arrValue[j] = arrValue[j + 1];
+                    arrValue[j + 1] = temp;
+                    
+                }
+            }
+        }
+
+    }
+
+    function doSetTimeout(arr, arrValue, j) {
+        setTimeout(() => {
+            arr[j].style.height = arrValue[j + 1] + 50 + 'px';
+            arr[j].innerHTML = arrValue[j + 1];
+            arr[j + 1].style.height = arrValue[j] + 50 + 'px';
+            arr[j + 1].innerHTML = arrValue[j];
+            console.log(arrValue[j] + " ---- " + arrValue[j + 1]);
+            let temp = arrValue[j];
+            arrValue[j] = arrValue[j + 1];
+            arrValue[j + 1] = temp;
+            console.log(arrValue);
+        }, j * 5000);
+    }
+
+
+    //创建一个新的li元素
+    function createInputElement() {
+        let inputValue = document.getElementById('input-example').value;
+        //判断输入值是否为数字      
+        if (isNaN(inputValue) || inputValue === "") {
+            modalDisplay('modal-dialog', '只能输入数字');
+            return;
+        }
+        if (inputValue < 10 || inputValue > 100) {
+            modalDisplay('modal-dialog', '只能输入10~100之间的数字');
+            return;
+        }
+        let li = document.createElement('li');
+        li.innerHTML = inputValue;
+
+        li.style.height = Number(inputValue) + 50 + 'px';
+        return li;
+    }
+
+
+    (function() {
+        let resultUl = document.getElementById('result-ul');
+        let hasChild = resultUl.getElementsByTagName('li');
+        let inputs = document.getElementById('input-example');
+
+        //左输入按钮
+        let btnLeftIn = document.getElementById('btn-left-in');
+        btnLeftIn.addEventListener('click', () => {
+            if (hasChild.length >= 60) {
+                modalDisplay('modal-dialog', '只能输入60个数字');
+                return;
+            }
+            let li = createInputElement();
+
+            resultUl.insertBefore(li, resultUl.firstChild);
+        });
+
+        //右输入按钮
+        let btnRightIn = document.getElementById('btn-right-in');
+        btnRightIn.addEventListener('click', () => {
+            if (hasChild.length >= 60) {
+                modalDisplay('modal-dialog', '只能输入60个数字');
+                return false;
+            } else {
+                let li = createInputElement();
+                resultUl.appendChild(li);
+            }
+
+        });
+
+        //左删除按钮
+        let btnLeftOut = document.getElementById('btn-left-out');
+        btnLeftOut.addEventListener('click', () => {
+            //判断是否还有子节点
+            if (hasChild.length > 0) {
+                let oldChild = resultUl.removeChild(resultUl.firstChild);
+                modalDisplay('modal-dialog', '删除左边的数据：' + oldChild.innerHTML);
+            } else {
+                modalDisplay('modal-dialog', '已经没有数据了');
+            }
+
+
+        });
+
+        //右删除按钮
+        let btnRightOut = document.getElementById('btn-right-out');
+        btnRightOut.addEventListener('click', () => {
+            //判断是否还有子节点    	
+            if (hasChild.length > 0) {
+                let oldChild = resultUl.removeChild(resultUl.lastChild);
+                modalDisplay('modal-dialog', '删除数据右边的数据：' + oldChild.innerHTML);
+            } else {
+                modalDisplay('modal-dialog', '已经没有数据了');
+            }
+
+        });
+    })();
+
+
+    //添加关闭弹窗按钮
+    let closeBtn = document.getElementById('close-btn');
+    closeBtn.addEventListener('click', () => modalHidden('modal-dialog'));
+    let closeX = document.getElementById('close-x');
+    closeX.addEventListener('click', () => modalHidden('modal-dialog'));
+
+    //弹窗关闭函数
+    function modalHidden(targetId) {
+        document.getElementById(targetId).style.display = 'none';
+    }
+    //弹窗打开函数
+    function modalDisplay(targetId, value) {
+        document.getElementById('modal-value').innerHTML = value;
+        document.getElementById(targetId).style.display = 'block';
+
+    }
+    </script>
+</body>
+
+</html>

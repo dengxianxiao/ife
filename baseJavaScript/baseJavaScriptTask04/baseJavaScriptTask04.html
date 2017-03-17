@@ -80,7 +80,7 @@
         	//判断是否还有子节点
         	if (hasChild.length > 0) {
         		let oldChild = resultUl.removeChild(resultUl.firstChild);
-        		modalDisplay('modal-dialog', '删除数据：' + oldChild.innerHTML);
+        		modalDisplay('modal-dialog', '删除左边的数据：' + oldChild.innerHTML);
 	        } else {
 	        	modalDisplay('modal-dialog', '已经没有数据了');
 	        }
@@ -94,7 +94,7 @@
         	//判断是否还有子节点    	
         	if (hasChild.length > 0) {
         		let oldChild = resultUl.removeChild(resultUl.lastChild);
-        		modalDisplay('modal-dialog', '删除数据：' + oldChild.innerHTML);
+        		modalDisplay('modal-dialog', '删除数据右边的数据：' + oldChild.innerHTML);
         	} else {
         		modalDisplay('modal-dialog', '已经没有数据了');
         	}
