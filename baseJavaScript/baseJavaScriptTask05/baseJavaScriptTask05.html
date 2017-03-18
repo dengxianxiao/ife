@@ -27,6 +27,10 @@
                 <li style="height: 70px">20</li>
                 <li style="height: 80px">30</li>
                 <li style="height: 130px">80</li>
+                <li style="height: 149px">99</li>
+                <li style="height: 130px">80</li>
+                <li style="height: 119px">69</li>
+                <li style="height: 72px">22</li>
             </ul>
         </div>
         <div>
@@ -47,30 +51,132 @@
         </div>
     </main>
     <script type="text/javascript">
-    let bubbleSortBtn = document.getElementById('bubbleSort-btn');
-    bubbleSortBtn.onclick = function() {
+    (function() {
+        //左进按钮
+        let btnLeftIn = document.getElementById('btn-left-in');
+        btnLeftIn.onclick = leftIn;
+        //右进按钮
+        let btnRightIn = document.getElementById('btn-right-in');
+        btnRightIn.onclick = rightIn;
+        //左出按钮
+        let btnLeftOut = document.getElementById('btn-left-out');
+        btnLeftOut.onclick = leftOut;
+        //右出按钮
+        let btnRightOut = document.getElementById('btn-right-out');
+        btnRightOut.onclick = rightOut;
+        //冒泡排序按钮
+        let bubbleSortBtn = document.getElementById('bubbleSort-btn');
+        bubbleSortBtn.onclick = bubbleSort;
+        //关闭弹窗按钮
+        let closeBtn = document.getElementById('close-btn');
+        closeBtn.onclick = () => modalHidden('modal-dialog');
+        let closeX = document.getElementById('close-x');
+        closeX.onclick = () => modalHidden('modal-dialog');
+    })();
+
+
+    //获取结果的li列表
+    function getResultLi() {
+        let resultUl = document.getElementById('result-ul');
+        return resultUl.getElementsByTagName('li');
+    }
+    //获取结果的ul
+    function getResultUl() {
+        return document.getElementById('result-ul');
+    }
+
+
+    //左输入按钮
+    function leftIn() {
+        let resultUl = getResultUl();
+        let li = createInputElement();
+        resultUl.insertBefore(li, resultUl.firstChild);
+    }
+
+    //右输入按钮
+    function rightIn() {
+        let resultUl = getResultUl();
+        let li = createInputElement();
+        resultUl.appendChild(li);
+
+    }
+
+    //左删除按钮
+    function leftOut() {
+        let resultUl = getResultUl();
+        let resultLi = getResultLi();
+        //判断是否还有子节点
+        if (resultLi.length > 0) {
+            let oldChild = resultUl.removeChild(resultUl.firstChild);
+            modalDisplay('modal-dialog', '删除左边的数据：' + oldChild.innerHTML);
+        } else {
+            modalDisplay('modal-dialog', '已经没有数据了');
+        }
+    }
+
+    //右删除按钮
+    function rightOut() {
+        let resultUl = getResultUl();
+        let resultLi = getResultLi();
+        //判断是否还有子节点     
+        if (resultLi.length > 0) {
+            let oldChild = resultUl.removeChild(resultUl.lastChild);
+            modalDisplay('modal-dialog', '删除数据右边的数据：' + oldChild.innerHTML);
+        } else {
+            modalDisplay('modal-dialog', '已经没有数据了');
+        }
+
+    }
+
+    //弹窗隐藏
+    function modalHidden(targetId) {
+        document.getElementById(targetId).style.display = 'none';
+    }
+    //弹窗显示
+    function modalDisplay(targetId, value) {
+        document.getElementById('modal-value').innerHTML = value;
+        document.getElementById(targetId).style.display = 'block';
+    }
+
+
+    //冒泡排序
+    function bubbleSort() {
         let resultUl = document.getElementById('result-ul');
         let arr = resultUl.getElementsByTagName('li');
         let arrValue = Array.from(arr).map((a) => Number(a.innerHTML));
-       
+        //第一个初始位置
+        let animationStep = [Array.from(arrValue)];
+
         for (let i = 0; i < arrValue.length - 1; i++) {
+
             for (let j = 0; j < arrValue.length - i - 1; j++) {
                 if (arrValue[j] > arrValue[j + 1]) {
-
-                    arr[j].style.height = arrValue[j + 1] + 50 + 'px';
-                    arr[j].innerHTML = arrValue[j + 1];
-                    arr[j + 1].style.height = arrValue[j] + 50 + 'px';
-                    arr[j + 1].innerHTML = arrValue[j];
-                    
                     let temp = arrValue[j];
                     arrValue[j] = arrValue[j + 1];
                     arrValue[j + 1] = temp;
-                    
+                    //复制当前的顺序，用于可视化
+                    animationStep.push(arrValue.slice(0));
                 }
             }
         }
 
+        // 高度改变动作可视化
+        // 使用let关键字解决闭包作用域问题，不用copy一个新的值，直接使用 i
+        for (let i = 1; i < animationStep.length; i++) {
+            // ((value) => {
+                setTimeout(() => {
+                    for (let j = 0; j < arr.length; j++) {
+                        //与上一步相比，高度不相同，改变两列高度和值
+                        if (animationStep[i][j] != animationStep[i - 1][j]) {
+                            arr[j].style.height = animationStep[i][j] + 50 + 'px';
+                            arr[j].innerHTML = animationStep[i][j];
+                        }
+                    }
+                }, i * 2000);
+            // })(i);
+        }
     }
+
 
 
 
@@ -91,83 +197,6 @@
 
         li.style.height = Number(inputValue) + 50 + 'px';
         return li;
-    }
-
-
-    (function() {
-        let resultUl = document.getElementById('result-ul');
-        let hasChild = resultUl.getElementsByTagName('li');
-        let inputs = document.getElementById('input-example');
-
-        //左输入按钮
-        let btnLeftIn = document.getElementById('btn-left-in');
-        btnLeftIn.addEventListener('click', () => {
-            if (hasChild.length >= 60) {
-                modalDisplay('modal-dialog', '只能输入60个数字');
-                return;
-            }
-            let li = createInputElement();
-
-            resultUl.insertBefore(li, resultUl.firstChild);
-        });
-
-        //右输入按钮
-        let btnRightIn = document.getElementById('btn-right-in');
-        btnRightIn.addEventListener('click', () => {
-            if (hasChild.length >= 60) {
-                modalDisplay('modal-dialog', '只能输入60个数字');
-                return false;
-            } else {
-                let li = createInputElement();
-                resultUl.appendChild(li);
-            }
-
-        });
-
-        //左删除按钮
-        let btnLeftOut = document.getElementById('btn-left-out');
-        btnLeftOut.addEventListener('click', () => {
-            //判断是否还有子节点
-            if (hasChild.length > 0) {
-                let oldChild = resultUl.removeChild(resultUl.firstChild);
-                modalDisplay('modal-dialog', '删除左边的数据：' + oldChild.innerHTML);
-            } else {
-                modalDisplay('modal-dialog', '已经没有数据了');
-            }
-
-
-        });
-
-        //右删除按钮
-        let btnRightOut = document.getElementById('btn-right-out');
-        btnRightOut.addEventListener('click', () => {
-            //判断是否还有子节点    	
-            if (hasChild.length > 0) {
-                let oldChild = resultUl.removeChild(resultUl.lastChild);
-                modalDisplay('modal-dialog', '删除数据右边的数据：' + oldChild.innerHTML);
-            } else {
-                modalDisplay('modal-dialog', '已经没有数据了');
-            }
-
-        });
-    })();
-
-
-    //添加关闭弹窗按钮
-    let closeBtn = document.getElementById('close-btn');
-    closeBtn.addEventListener('click', () => modalHidden('modal-dialog'));
-    let closeX = document.getElementById('close-x');
-    closeX.addEventListener('click', () => modalHidden('modal-dialog'));
-
-    //弹窗关闭函数
-    function modalHidden(targetId) {
-        document.getElementById(targetId).style.display = 'none';
-    }
-    //弹窗打开函数
-    function modalDisplay(targetId, value) {
-        document.getElementById('modal-value').innerHTML = value;
-        document.getElementById(targetId).style.display = 'block';
-
     }
     </script>
 </body>
