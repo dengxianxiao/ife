@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Base JavaScript Task 06</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+    <main class="container">
+        <div class="input-wrapper">
+            <div class="form-group">
+                <label for="input-example"></label>
+                <!-- <input type="text" class="form-control" id="input-example"> -->
+                <textarea class="form-control" id="input-example"></textarea>
+            </div>
+            <div class="btn-wrapper clearfix">
+                <div class="input-btn">
+                    <button id="btn-left-in" class="btn btn-default">左侧入</button>
+                    <button id="btn-right-in" class="btn btn-default">右侧入</button>
+                    <button id="btn-left-out" class="btn btn-default">左侧出</button>
+                    <button id="btn-right-out" class="btn btn-default">右侧出</button>
+                </div>
+                <div class="search-btn">
+                    <label for="" class="search-label">
+                        <input id="search-input" type="text" class="form-control">
+                    </label>
+                    <button id="search-btn" class="btn btn-default">查询</button>
+                </div>
+            </div>
+        </div>
+        <div class="result position-relative">
+            <ul id="result-ul">
+            </ul>
+        </div>
+        <div id="modal-dialog" class="modal-dialog modalDisplay">
+            <div class="modal-content position-relative">
+                <header class="modal-header">提示：
+                    <a href="#" id="close-x" class="close-x">x</a>
+                </header>
+                <div id="modal-value" class="modal-body">
+                    输入的值为：<span class="modal-value">123</span>
+                </div>
+                <div class="modal-footer">
+                    <button id="close-btn" class="btn close-modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script type="text/javascript">
+    (function() {
+        //左进按钮
+        let btnLeftIn = document.getElementById('btn-left-in');
+        btnLeftIn.onclick = leftIn;
+        //右进按钮
+        let btnRightIn = document.getElementById('btn-right-in');
+        btnRightIn.onclick = rightIn;
+        //左出按钮
+        let btnLeftOut = document.getElementById('btn-left-out');
+        btnLeftOut.onclick = leftOut;
+        //右出按钮
+        let btnRightOut = document.getElementById('btn-right-out');
+        btnRightOut.onclick = rightOut;
+        //查询按钮
+        let searchBtn = document.getElementById('search-btn');
+        searchBtn.onclick = searchInput;
+        //关闭弹窗按钮
+        let closeBtn = document.getElementById('close-btn');
+        closeBtn.onclick = () => modalHidden('modal-dialog');
+        let closeX = document.getElementById('close-x');
+        closeX.onclick = () => modalHidden('modal-dialog');
+    })();
+
+
+    //获取结果的li列表
+    function getResultLi() {
+        let resultUl = document.getElementById('result-ul');
+        return resultUl.getElementsByTagName('li');
+    }
+    //获取结果的ul
+    function getResultUl() {
+        return document.getElementById('result-ul');
+    }
+
+    //创建需要返回的Li元素
+    function createInputElement() {
+        let inputValue = document.getElementById('input-example').value;
+        if (!inputValue) {
+            modalDisplay('modal-dialog', '输入值不能为空');
+            return;
+        }
+
+        //以非数字，字母，汉字，空格下划线分隔字符
+        inputValue = inputValue.replace(/\s\s+/g, ' '); //去掉无用字符  
+        let inputArr = inputValue.split(/[^\w\u4e00-\u9fa5]/); //分隔字符串
+        //去掉空白字符
+        inputArr = inputArr.filter((element) => {
+            if (/[\w\u4e00-\u9fa5]/.test(element)) {
+                return element;
+            }
+        });
+        let liArr = [];
+        inputArr.forEach((element) => {
+            let li = document.createElement('li');
+            li.innerHTML = element;
+            liArr.push(li);
+        });
+        return liArr;
+    }
+
+
+
+    //左输入按钮
+    function leftIn() {
+        let resultUl = getResultUl();
+        let liArr = createInputElement();
+        for (let i = liArr.length - 1; i >= 0; i--) {
+            resultUl.insertBefore(liArr[i], resultUl.firstChild);
+        }
+    }
+
+    //右输入按钮
+    function rightIn() {
+
+        let resultUl = getResultUl();
+        let liArr = createInputElement();
+        liArr.forEach((element) => resultUl.appendChild(element));
+
+    }
+
+    //左删除按钮
+    function leftOut() {
+        let resultUl = getResultUl();
+        let resultLi = getResultLi();
+        //判断是否还有子节点
+        if (resultLi.length > 0) {
+            let oldChild = resultUl.removeChild(resultUl.firstChild);
+            modalDisplay('modal-dialog', '删除左边的数据：' + oldChild.innerHTML);
+        } else {
+            modalDisplay('modal-dialog', '已经没有数据了');
+        }
+    }
+
+    //右删除按钮
+    function rightOut() {
+        let resultUl = getResultUl();
+        let resultLi = getResultLi();
+        //判断是否还有子节点    	
+        if (resultLi.length > 0) {
+            let oldChild = resultUl.removeChild(resultUl.lastChild);
+            modalDisplay('modal-dialog', '删除数据右边的数据：' + oldChild.innerHTML);
+        } else {
+            modalDisplay('modal-dialog', '已经没有数据了');
+        }
+
+    }
+
+
+    //模糊查找输入值
+    function searchInput() {
+
+        let resultLi = getResultLi();
+        let searchInput = document.getElementById('search-input').value;
+        let count = 0;
+        if (resultLi.length > 0) {
+            Array.from(resultLi).forEach((element, i) => element.innerHTML.includes(searchInput) === true ?
+                (resultLi[i].style.backgroundColor = '#FC6161',
+                    count++) :
+                resultLi[i].style.backgroundColor = '#2494dd'
+            );
+            count === 0 ? modalDisplay('modal-dialog', '无匹配结果') : '';
+        }
+    }
+
+
+
+    //弹窗隐藏
+    function modalHidden(targetId) {
+        document.getElementById(targetId).style.display = 'none';
+    }
+    //弹窗显示
+    function modalDisplay(targetId, value) {
+        document.getElementById('modal-value').innerHTML = value;
+        document.getElementById(targetId).style.display = 'block';
+    }
+    </script>
+</body>
+
+</html>

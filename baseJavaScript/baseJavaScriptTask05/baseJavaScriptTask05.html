@@ -72,19 +72,6 @@
 
     }
 
-    function doSetTimeout(arr, arrValue, j) {
-        setTimeout(() => {
-            arr[j].style.height = arrValue[j + 1] + 50 + 'px';
-            arr[j].innerHTML = arrValue[j + 1];
-            arr[j + 1].style.height = arrValue[j] + 50 + 'px';
-            arr[j + 1].innerHTML = arrValue[j];
-            console.log(arrValue[j] + " ---- " + arrValue[j + 1]);
-            let temp = arrValue[j];
-            arrValue[j] = arrValue[j + 1];
-            arrValue[j + 1] = temp;
-            console.log(arrValue);
-        }, j * 5000);
-    }
 
 
     //创建一个新的li元素
