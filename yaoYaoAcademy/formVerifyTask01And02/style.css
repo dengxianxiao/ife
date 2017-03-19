@@ -28,6 +28,14 @@ label {
 	padding-top: 8px;
 }
 
+input {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	-ms-appearance: none;
+	appearance: none;
+	
+}
+
 .form-horizontal label {
 	text-align: right;	
 }
@@ -103,4 +111,87 @@ label {
 
 
 
+
+/*//弹出框*/
+.modal-dialog {
+	position: fixed;
+	display: none;
+	top: 30px;
+	left: 50%;
+	transform: translateX(-50%);
+	right: 0;
+	bottom: 0;
+	z-index: 1000;
+	width: 400px;
+}
+.modalDisplay {
+	animation: modalDisplay 0.5s;
+}
+@keyframes modalDisplay {
+	0% {opacity: 0;}
+	100% {opacity: 1;}
+}
+
+
+.modal-content {
+	background-color: #eee;
+	border: 1px solid rgba(0,0,0,.2);
+	border-radius: 6px;
+	background-clip: padding-box;
+	box-shadow: 0 5px 15px rgba(0,0,0,.5);
+	/* padding: 15px; */
+}
+.modal-header {
+	padding: 15px;
+	color: #eee;
+	background-color: #2494dd;
+	font-size: 20px;
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+	/*text-align: center;*/
+}
+a {
+	text-decoration: none;
+	background-color: transparent;
+}
+.close-x {
+	color: #eee;
+	font-weight: bold;
+	font-size: 35px;
+	float: right;
+	text-shadow: 0 1px 0 #eee;
+	opacity: 0.5;
+	margin-top: -15px;
+}
+.close-x:hover {
+	opacity: 1;
+}
+.modal-body {
+	padding: 15px;
+	font-size: 20px;
+	height: 200px;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.close-modal {
+	border: 1px solid #aaa;
+	position: relative;
+	left: 50%;
+	width: 100%;
+	font-size: 18px;
+	letter-spacing: 10px;
+	transform: translateX(-50%);
+}
+.modal-footer {
+	padding: 15px;
+	
+}
+
+
+.close-modal:hover {
+	background-color: #2494dd;
+	color: #fff;
+}
 

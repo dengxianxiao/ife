@@ -9,7 +9,7 @@
 
 <body>
     <main class="container">
-        <form action="#" id="submit-form">
+        <form action="#" id="submit-form" novalidate>
             <div class="row form-horizontal">
                 <label for="username" class="col-md-2">名称</label>
                 <div class="col-md-9">
@@ -59,16 +59,40 @@
                 <button id="submit" type="submit" class="btn btn-default col-md-offset-10 col-md-1">验证</button>
             </div>
         </form>
+        <div id="modal-dialog" class="modal-dialog modalDisplay">
+            <div class="modal-content position-relative">
+                <header class="modal-header">提示：
+                    <a href="#" id="close-x" class="close-x">x</a>
+                </header>
+                <div id="modal-value" class="modal-body">
+                    输入的值为：<span class="modal-value">123</span>
+                </div>
+                <div class="modal-footer">
+                    <button id="close-btn" class="btn close-modal">关闭</button>
+                </div>
+            </div>
+        </div>
     </main>
     <script type="text/javascript">
     let inputArr = document.getElementsByTagName('input');
     let submitForm = document.getElementById('submit-form');
-    
+    let correct = [];
+    for (let i = 0; i < 5; i++) {
+        correct.push(false);
+    }
+
     submitForm.onsubmit = () => {
         Array.from(inputArr).forEach((element) => {
+            //提交时触发所有失去焦点事件
             element.focus();
             element.blur();
         });
+        //判断是否所有的值都输入正确
+        if (!correct.every((value) => value === true)) {
+            modalDisplay('modal-dialog', '输入有误，请修改错误信息');
+            return false;
+        }
+        modalDisplay('modal-dialog', '提交成功');
         return false;
     };
 
@@ -88,39 +112,39 @@
             //失去焦点没有值时
             if (len <= 0) {
                 setupHelp(inputHelp[inputIdValue].info.none, inputHelp.color.error);
-                
+
             } else {
                 switch (inputIdValue) {
                     //校验用户名
                     case 'username':
                         {
-                            setupHelpCondition(len >= 4 && len <= 16);
+                            correct[0] = setupHelpCondition(len >= 4 && len <= 16);
                         }
                         break;
                     case 'password':
                         {
                             let regex = /^(?=.*?[A-Za-z])(?=.*?[0-9]).{8,16}$/g;
-                            setupHelpCondition(regex.test(inputValue));
+                            correct[1] = setupHelpCondition(regex.test(inputValue));
                         }
                         break;
                     case 'passwordAgain':
                         {
                             let password = document.getElementById('password').value;
 
-                            setupHelpCondition(inputValue == password);
+                            correct[2] = setupHelpCondition(inputValue == password);
                         }
                         break;
                     case 'email':
                         {
                             let regex = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
-                            setupHelpCondition(regex.test(inputValue));
+                            correct[3] = setupHelpCondition(regex.test(inputValue));
                         }
                         break;
                     case 'cellphone':
                         {
                             let regex = /(13\d|14[57]|15[^4,\D]|17[678]|18\d)\d{8}|170[059]\d{7}/;
-                            setupHelpCondition(regex.test(inputValue));
-                            return 123;
+                            correct[4] = setupHelpCondition(regex.test(inputValue));
+
                         }
                         break;
                 }
@@ -132,11 +156,11 @@
                 //     setupHelp(inputHelp[inputIdValue].info.correct, inputHelp.color.correct) :
                 //     setupHelp(inputHelp[inputIdValue].info.error, inputHelp.color.error);
                 if (condition) {
-                	setupHelp(inputHelp[inputIdValue].info.correct, inputHelp.color.correct);
-                	
+                    setupHelp(inputHelp[inputIdValue].info.correct, inputHelp.color.correct);
+                    return true;
                 } else {
-                	setupHelp(inputHelp[inputIdValue].info.error, inputHelp.color.error);
-                	
+                    setupHelp(inputHelp[inputIdValue].info.error, inputHelp.color.error);
+                    return false;
                 }
             }
 
@@ -195,6 +219,23 @@
         }
     };
 
+
+
+    //关闭弹窗按钮
+    let closeBtn = document.getElementById('close-btn');
+    closeBtn.onclick = () => modalHidden('modal-dialog');
+    let closeX = document.getElementById('close-x');
+    closeX.onclick = () => modalHidden('modal-dialog');
+
+    //弹窗隐藏
+    function modalHidden(targetId) {
+        document.getElementById(targetId).style.display = 'none';
+    }
+    //弹窗显示
+    function modalDisplay(targetId, value) {
+        document.getElementById('modal-value').innerHTML = value;
+        document.getElementById(targetId).style.display = 'block';
+    }
 
 
     //求字符串长度
