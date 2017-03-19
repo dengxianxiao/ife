@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Form Verify Task 01 02</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+    <main class="container">
+        <form action="#" id="submit-form">
+            <div class="row form-horizontal">
+                <label for="username" class="col-md-2">名称</label>
+                <div class="col-md-9">
+                    <input class="form-control" type="text" name="username" id="username">
+                </div>
+            </div>
+            <div id="help-username" class="row help-row col-md-offset-2 col-md-9">
+                必须，长度为4~16位字符
+            </div>
+            <div class="row form-horizontal">
+                <label for="password" class="col-md-2">密码</label>
+                <div class="col-md-9">
+                    <input class="form-control" type="password" name="password" id="password">
+                </div>
+            </div>
+            <div id="help-password" class="row help-row col-md-offset-2 col-md-9">
+                必须，长度为8~16位字母和数字组合
+            </div>
+            <div class="row form-horizontal">
+                <label for="passwordAgain" class="col-md-2 username">密码确认</label>
+                <div class="col-md-9">
+                    <input class="form-control" type="password" name="passwordAgain" id="passwordAgain">
+                </div>
+            </div>
+            <div id="help-passwordAgain" class="row help-row col-md-offset-2 col-md-9">
+                必须，长度为8~16位字母和数字组合
+            </div>
+            <div class="row form-horizontal">
+                <label for="email" class="col-md-2 username">邮箱</label>
+                <div class="col-md-9">
+                    <input class="form-control" type="email" name="email" id="email">
+                </div>
+            </div>
+            <div id="help-email" class="row help-row col-md-offset-2 col-md-9">
+                必须，格式为example@email.com
+            </div>
+            <div class="row form-horizontal">
+                <label for="cellphone" class="col-md-2 username">手机</label>
+                <div class="col-md-9">
+                    <input class="form-control" type="text" name="cellphone" id="cellphone">
+                </div>
+            </div>
+            <div id="help-cellphone" class="row help-row col-md-offset-2 col-md-9">
+                必须，请输入正确的手机号码
+            </div>
+            <div class="row">
+                <button id="submit" type="submit" class="btn btn-default col-md-offset-10 col-md-1">验证</button>
+            </div>
+        </form>
+    </main>
+    <script type="text/javascript">
+    let inputArr = document.getElementsByTagName('input');
+    let submitForm = document.getElementById('submit-form');
+    
+    submitForm.onsubmit = () => {
+        Array.from(inputArr).forEach((element) => {
+            element.focus();
+            element.blur();
+        });
+        return false;
+    };
+
+    //为每个输入框添加点击，失去焦点事件
+    Array.from(inputArr).forEach((element) => {
+        let inputIdValue = element.getAttribute('id');
+        let helpId = document.getElementById('help-' + inputIdValue);
+
+        //获得焦点
+        element.onfocus = () => helpId.style.display = 'block';
+
+        //失去焦点
+        element.onblur = () => {
+            helpId.style.opacity = 1;
+            let inputValue = document.getElementById(inputIdValue).value;
+            let len = byteLength(inputValue);
+            //失去焦点没有值时
+            if (len <= 0) {
+                setupHelp(inputHelp[inputIdValue].info.none, inputHelp.color.error);
+                
+            } else {
+                switch (inputIdValue) {
+                    //校验用户名
+                    case 'username':
+                        {
+                            setupHelpCondition(len >= 4 && len <= 16);
+                        }
+                        break;
+                    case 'password':
+                        {
+                            let regex = /^(?=.*?[A-Za-z])(?=.*?[0-9]).{8,16}$/g;
+                            setupHelpCondition(regex.test(inputValue));
+                        }
+                        break;
+                    case 'passwordAgain':
+                        {
+                            let password = document.getElementById('password').value;
+
+                            setupHelpCondition(inputValue == password);
+                        }
+                        break;
+                    case 'email':
+                        {
+                            let regex = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+                            setupHelpCondition(regex.test(inputValue));
+                        }
+                        break;
+                    case 'cellphone':
+                        {
+                            let regex = /(13\d|14[57]|15[^4,\D]|17[678]|18\d)\d{8}|170[059]\d{7}/;
+                            setupHelpCondition(regex.test(inputValue));
+                            return 123;
+                        }
+                        break;
+                }
+            }
+
+            //校验条件是否正确并返回相应信息
+            function setupHelpCondition(condition) {
+                // condition === true ?
+                //     setupHelp(inputHelp[inputIdValue].info.correct, inputHelp.color.correct) :
+                //     setupHelp(inputHelp[inputIdValue].info.error, inputHelp.color.error);
+                if (condition) {
+                	setupHelp(inputHelp[inputIdValue].info.correct, inputHelp.color.correct);
+                	
+                } else {
+                	setupHelp(inputHelp[inputIdValue].info.error, inputHelp.color.error);
+                	
+                }
+            }
+
+            //设置提示信息和提示颜色
+            function setupHelp(helpInfo, color) {
+                helpId.innerHTML = helpInfo;
+                helpId.style.color = color;
+                element.style.borderColor = color;
+            }
+
+        };
+
+    }); //forEach
+
+    //提示信息
+    const inputHelp = {
+        'username': {
+            'info': {
+                'none': '用户名不能为空！',
+                'error': '用户名格式不正确！',
+                'correct': '用户名格式正确！'
+            },
+        },
+        'password': {
+            'info': {
+                'none': '密码不能为空！',
+                'error': '密码格式不正确！',
+                'correct': '密码可用！'
+            },
+        },
+        'passwordAgain': {
+            'info': {
+                'none': '密码确认不能为空！',
+                'error': '两次输入的密码不一致！',
+                'correct': '两次输入密码一致！'
+            },
+        },
+        'email': {
+            'info': {
+                'none': '邮箱不能为空！',
+                'error': '邮箱格式不正确！',
+                'correct': '邮箱格式正确！'
+            },
+        },
+        'cellphone': {
+            'info': {
+                'none': '手机号码不能为空！',
+                'error': '手机号码格式不正确！',
+                'correct': '手机号码格式正确！'
+            },
+        },
+
+        'color': {
+            'error': '#FC5151',
+            'correct': '#26AC26',
+        }
+    };
+
+
+
+    //求字符串长度
+    function byteLength(str) {
+        let len = 0;
+        for (let i = 0; i < str.length; i++) {
+            let code = str.charCodeAt(i);
+            (code >= 0 && code <= 128) ? len++ : len += 2;
+        }
+        return len;
+    }
+    </script>
+</body>
+
+</html>

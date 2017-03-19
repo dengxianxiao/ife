@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="exampleStyle.css">
+</head>
+
+<body>
+    <form id="submitForm">
+        <input id="input-1" type="text" class="validateme" value="input 1" />
+        <br/>
+        <input type="text" class="validateme" value="input 2" />
+        <br/>
+        <input type="text" class="validateme" value="input 3" />
+        <br/>
+        <input type="text" class="validateme" value="input 4" />
+        <br/>
+        <input type="submit" id="submit"></input>
+    </form>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script type="text/javascript">
+
+    
+
+
+    let input = document.getElementsByTagName('input');
+
+    Array.from(input).forEach((element) => {
+        element.onblur = () => (console.log(element.value));
+    });
+
+    let form = document.getElementById('submitForm');
+
+    form.onsubmit = () => {
+        document.getElementById('input-1').focus();
+
+        // document.getElementById('input-1').blur();
+        return false;
+    };
+    </script>
+</body>
+
+</html>
