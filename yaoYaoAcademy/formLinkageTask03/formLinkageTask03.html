@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Form Linkage Task 03</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+    <main class="container clearfix">
+        <div class="row radio-wrapper">
+            <div class="student col-md-2 col-md-offset-2">
+                <input type="radio" id="school-student" name="student" checked>
+                <label for="school-student" class="tab-label"><span class="radio-circle"></span>在校生</label>
+            </div>
+            <div id="not-student" class="not-student col-md-3 col-md-offset-1">
+                <input type="radio" id="not-school-student" name="student">
+                <label for="not-school-student" class="tab-label"><span class="radio-circle"></span>非在校生</label>
+            </div>
+        </div>
+        <div class="row">
+            <div id="student-content" class="student-content clearfix">
+                <div class="label-horizontal label-university col-md-2">学校</div>
+                <div class="col-md-3 city-wrapper">
+                    <select id="city" name="city" class="form-control">
+                    </select>
+                    <span class="previous-icon"></span>
+                    <span class="next-icon"></span>
+                </div>
+                <div class="col-md-5 university-wrapper">
+                    <select id="university" name="university" class="form-control">
+                    </select>
+                    <span class="previous-icon"></span>
+                    <span class="next-icon"></span>
+                </div>
+            </div>
+            <div id="not-student-content" class="not-student-content clearfix">
+                <label for="employ-company" class="label-horizontal label-employ col-md-2">就业单位</label>
+                <div class="col-md-8">
+                    <input id="employ-company" type="text" class="form-control employ-company">
+                </div>
+            </div>
+        </div>
+    </main>
+    <script type="text/javascript">
+    const cityUniversity = [{
+        'cityValue': 'beijing',
+        'cityName': '北京',
+        'university': [{
+            'value': 'Peking University',
+            'name': '北京大学'
+        }, {
+            'value': 'Tsinghua University',
+            'name': '清华大学'
+        }]
+    }, {
+        'cityValue': 'shanghai',
+        'cityName': '上海',
+        'university': [{
+            'value': 'Fudan University',
+            'name': '复旦大学'
+        }, {
+            'value': 'Shanghai Jiao Tong University',
+            'name': '上海交通大学'
+        }]
+    }];
+
+    //城市改变时修改大学列表
+    function changeUniversity() {
+        let cityValue = document.getElementById('city').value;
+        let universitySelect = document.getElementById('university');
+        if (cityValue) {
+            //清除所有子节点
+            universitySelect.innerHTML = '';
+            //修改大学列表
+            cityUniversity.forEach((city) => {
+                if (city.cityValue == cityValue) {
+                    city.university.forEach((element) => {
+                        let option = document.createElement('option');
+                        option.setAttribute('value', element.value);
+                        option.innerHTML = element.name;
+                        universitySelect.appendChild(option);
+                    });
+                }
+            });
+        }
+    }
+
+   
+
+    (function() {
+        //初始化城市列表
+        let citySelect = document.getElementById('city');
+        for (let i = 0; i < cityUniversity.length; i++) {
+            let option = document.createElement('option');
+            option.setAttribute('value', cityUniversity[i].cityValue);
+            option.innerHTML = cityUniversity[i].cityName;
+            citySelect.appendChild(option);
+        }
+        //页面初始化时查询
+        if (citySelect.value) {
+            changeUniversity();
+        }
+        //城市改变时修改大学列表
+        citySelect.onchange = changeUniversity;
+
+
+        //在校生，非在校生切换
+        let schoolStudent = document.getElementById('school-student');
+        let notSchoolStudent = document.getElementById('not-school-student');
+        let studentContent = document.getElementById('student-content');
+        let notStudentContent = document.getElementById('not-student-content');
+
+        schoolStudent.onclick = () => {
+            studentContent.style.display = 'block';
+            notStudentContent.style.display = 'none';
+        };
+        notSchoolStudent.onclick = () => {
+            studentContent.style.display = 'none';
+            notStudentContent.style.display = 'block';
+        };
+    })();
+    </script>
+</body>
+
+</html>
