@@ -1,0 +1,138 @@
+body {
+	margin: 0;
+}
+* {
+	box-sizing: border-box;
+}
+.container {
+	width: 980px;
+	margin: 0 auto;
+	display: flex;
+	justify-content: center;
+	flex-flow: row nowrap;
+	align-items: center;	
+	margin-top: 50px;
+}
+.table-wrapper {
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+	align-items: center;
+}
+ol {	
+	color: #555;
+	padding-left: 50px;
+}
+ol li {
+	padding: 5px;
+}
+table {
+	border-collapse: collapse;
+	position: relative;
+}
+td {
+	width: 40px;
+	height: 40px;
+	text-align: center;
+	border: 1px solid #ccc;
+}
+tr td:first-child {
+	border-width: 0;
+}
+table tr:first-child td {
+	border-width: 0;
+}
+tr:nth-child(6) td:nth-child(6) {
+	
+}
+
+#box {
+	width: 40px;
+	height: 40px;
+	background-color: #fd3c3c;
+	border-right: 10px solid #0f63f4;
+	position: absolute;
+	top: 200px;
+	left: 200px;
+	transition: all 0.5s ease-in-out;
+	
+}
+.box:hover {
+	transform: translateX(40px);
+}
+ @keyframes goHead {
+ 	100% {transform: translateX(40px);}
+ }
+
+.right {
+	width: 40px;
+	height: 40px;
+	background-color: red;
+	border-right: 10px solid blue;
+	margin: -1px;	
+}
+.bottom {
+	width: 40px;
+	height: 40px;
+	background-color: red;
+	border-bottom: 10px solid blue;
+	margin: -1px;	
+}
+.left {
+	width: 40px;
+	height: 40px;
+	background-color: red;
+	border-left: 10px solid blue;
+	margin: -1px;	
+}
+.top {
+	width: 40px;
+	height: 40px;
+	background-color: red;
+	border-top: 10px solid blue;
+	margin: -1px;	
+}
+
+
+
+
+
+.turn-right-90deg {
+	transform: rotate(90deg);
+}
+
+.turn-left-90deg {
+	animation: turnLeft 2s;
+}
+
+.submit-wrapper {
+	margin-top: 20px;
+	display: flex;
+	flex-flow: row nowrap;
+}
+.form-control {
+	width: 100%;
+	height: 38px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	padding: 6px 12px;
+	/* box-shadow: 0 0 3px #ccc; */
+}
+
+button {
+	cursor: pointer;
+}
+.btn {
+	display: inline-block;
+	padding: 6px 12px;
+	background-color: #fff;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	margin-left: 20px;
+}
+
+.btn:hover {
+	background-color: #eee;
+}
+
+

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		div.testbox:nth-child(4n+6) {
+  color: red;
+}
+div.testbox:nth-child(4n+3) {
+  color: blue;
+}
+	</style>
+</head>
+<body>
+	<div class="testbox">here is some text</div>
+<div class="testbox">here is some text</div>
+<div class="testbox">here is some text</div>
+<div class="testbox">here is some text</div>
+<div class="testbox">here is some text</div>
+<div class="testbox">here is some text</div>
+<div class="testbox">here is some text</div>
+<div class="testbox">here is some text</div>
+<div class="testbox">here is some text</div>
+<div class="testbox">here is some text</div>
+<div class="testbox">here is some text</div>
+<div class="testbox">here is some text</div>
+<div class="testbox">here is some text</div>
+<div class="testbox">here is some text</div>
+<div class="testbox">here is some text</div>
+<div class="testbox">here is some text</div>
+<div class="testbox">here is some text</div>
+<div class="testbox">here is some text</div>
+<div class="testbox">here is some text</div>
+<div class="testbox">here is some text</div>
+<script type="text/javascript">
+	[].slice.call(document.querySelectorAll("div.testbox:nth-child(4n+6)")).map(function(i) {
+  i.style.backgroundColor = "#333";
+});
+[].slice.call(document.querySelectorAll("div.testbox:nth-child(4n+3)")).map(function(i) {
+  i.style.backgroundColor = "#eee";
+});
+
+let sele = document.querySelectorAll('div.testbox');
+console.log(sele);
+</script>
+</body>
+</html>
