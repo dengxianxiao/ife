@@ -1,0 +1,169 @@
+body {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.42;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button,
+a {
+    cursor: pointer;
+}
+
+.container {
+    width: 980px;
+    margin: 0 auto;
+    height: 2000px;
+}
+
+#float-layer-container {
+    /*width: 100vw; 屏幕宽度单位 100% */
+    /*height: 100vh; 屏幕高度单位 100% */
+    width: 100%;
+    height: 100%;
+    display: none;
+    position: fixed;
+    z-index: 500;
+    top: 0;
+    left: 0;
+    /*background-color: rgb(0,0,0); */
+    background-color: rgba(0, 0, 0, 0.2);
+    animation: floatLayerAnimation 0.5s;
+}
+
+@keyframes floatLayerAnimation {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.float-layer {
+    width: 500px;
+    height: 400px;
+    min-width: 400px;
+    min-height: 300px; 
+    border: 1px solid #ccc;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background: rgba(100,100,100,1);
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    overflow: auto;
+    resize: both;
+}
+
+.float-layer header {
+    height: 50px;
+    padding: 15px 10px;
+    color: #fff;
+    letter-spacing: 1px;
+    background-color: #439CFC;
+    position: relative;
+}
+
+.float-layer .header-title {
+    float: left;
+}
+
+.float-layer .header-x {
+    font-size: 24px;
+    margin-top: -8px;
+    color: #ccc;
+    float: right;
+}
+
+.float-layer .header-x:hover,
+.float-layer-footer button:hover {
+    color: #fff;
+}
+
+.float-layer-footer button:hover {
+    background-color: #1E70F9;
+}
+
+.float-layer-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    color: #333;
+    padding: 20px 10px;
+    min-height: 200px;
+    height: calc(100% - 99px);
+}
+
+.float-layer-body,
+.float-layer-footer {
+    background-color: #fff;
+}
+
+
+.float-layer-footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    height: 50px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+
+}
+
+.float-layer-footer button {
+    color: #eee;
+    background-color: #439CFC;
+    padding: 10px 40px;
+    letter-spacing: 1px;
+    border: 1px solid #439CFC;
+    margin: 10px 10px 10px 0;
+}
+
+.btn {
+    padding: 6px 12px;
+    color: #444;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.btn-default {
+    color: #fff;
+    background-color: #439CFC;
+    border-color: #439CFC;
+}
+
+.btn-default:hover {
+    background-color: #1E70F9;
+}
+
+.other-info {
+    margin-top: 100px;
+    margin-left: 100px;
+}
+
+.other-info header {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.other-info ul li {
+    font-size: 20px;
+}
+
+.other-info ul li p {
+    font-size: 14px;
+}
+

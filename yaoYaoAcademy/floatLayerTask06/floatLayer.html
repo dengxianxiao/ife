@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Float Layer</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+    <main class="container">
+        <div id="float-layer-container" class="float-layer-container">
+            <div id="float-layer" class="float-layer">
+                <header id="float-layer-header">
+                    <span class="header-title">浮出层例子</span>
+                    <a class="header-x close-float-layer" href="#">x</a>
+                </header>
+                <div class="float-layer-body">
+                    <div id="float-layer-info">浮出来看一下</div>
+                </div>
+                <div class="float-layer-footer">
+                    <button class="close-float-layer">确定</button>
+                    <button class="close-float-layer">取消</button>
+                </div>
+            </div>
+        </div>
+        <div class="other-info">
+            <header>The position property specifies the type of positioning method used for an element (static, relative, fixed or absolute).</header>
+            <ul>
+                <li>static
+                    <p>HTML elements are positioned static by default. Static positioned elements are not affected by the top, bottom, left, and right properties.</p>
+                </li>
+                <li>relative
+                    <p>An element with position: relative; is positioned relative to its normal position. Setting the top, right, bottom, and left properties of a relatively-positioned element will cause it to be adjusted away from its normal position. Other content will not be adjusted to fit into any gap left by the element.</p>
+                </li>
+                <li>absolute
+                    <p>An element with position: absolute; is positioned relative to the nearest positioned ancestor (instead of positioned relative to the viewport, like fixed). However; if an absolute positioned element has no positioned ancestors, it uses the document body, and moves along with page scrolling.</p>
+                </li>
+                <li>fixed
+                    <p>An element with position: fixed; is positioned relative to the viewport, which means it always stays in the same place even if the page is scrolled. The top, right, bottom, and left properties are used to position the element. A fixed element does not leave a gap in the page where it would normally have been located.</p>
+                </li>
+            </ul>
+            <button id="open-float-layer" class="btn btn-default">浮出层</button>
+        </div>
+    </main>
+    <script type="text/javascript">
+    //打开浮出层
+    let openFloatLayerBtn = document.getElementById('open-float-layer');
+    openFloatLayerBtn.onclick = () => openFloatLayer('drag me');
+    //关闭浮出层函数
+    function closeFloatLayer() {
+        let floatLayerContainer = document.getElementById('float-layer-container');
+        floatLayerContainer.style.display = 'none';
+    }
+
+
+
+    //弹出浮出层
+    function openFloatLayer(info, width, height) {
+    	console.log('width = ' + width + 'height = ' + height);
+        let floatLayer = document.getElementById('float-layer');
+        width ? floatLayer.style.width = width : '';
+        height ? floatLayer.style.height = height : '';
+        let floatLayerContainer = document.getElementById('float-layer-container');
+        document.getElementById('float-layer-info').innerHTML = info;
+        floatLayerContainer.style.display = 'block';
+
+        //点击弹窗外时关闭弹窗
+        window.onclick = (event) => event.target == floatLayerContainer ? closeFloatLayer() : '';
+
+        //弹出浮出层时，按钮添加关闭功能
+        let closeFloatLayerBtn = document.getElementsByClassName('close-float-layer');
+        Array.from(closeFloatLayerBtn).forEach((element) => element.onclick = closeFloatLayer);
+
+
+
+        //设置弹窗可拖动       
+        floatLayer.draggable = "true"; //THML5全局属性
+        floatLayer.addEventListener('dragstart', dragStart, false);
+        document.body.addEventListener('dragover', dragOver, false);
+        document.body.addEventListener('drop', drop, false);
+
+        function dragStart(event) {
+            let style = window.getComputedStyle(event.target, null);
+            //设置窗口初始的left,top的值
+            event.dataTransfer.setData("text/plain",
+                (parseInt(style.getPropertyValue("left"), 10) - event.clientX) + ',' + (parseInt(style.getPropertyValue("top"), 10) - event.clientY));
+        }
+
+        function drop(event) {
+            //获取窗口初始的left,top的值
+            let offset = event.dataTransfer.getData("text/plain").split(',');
+            floatLayer.style.left = (event.clientX + parseInt(offset[0], 10)) + 'px';
+            floatLayer.style.top = (event.clientY + parseInt(offset[1], 10)) + 'px';
+            event.preventDefault();
+            return false;
+        }
+
+        function dragOver(event) {
+            event.preventDefault();
+            return false;
+        }
+
+    }
+    </script>
+</body>
+
+</html>
