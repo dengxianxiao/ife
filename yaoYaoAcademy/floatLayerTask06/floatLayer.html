@@ -53,11 +53,33 @@
         floatLayerContainer.style.display = 'none';
     }
     //设置弹窗可拖动       
-    let floatLayer = document.getElementById('float-layer');
-    floatLayer.draggable = "true"; //THML5全局属性
-    floatLayer.addEventListener('dragstart', dragStart, false);
-    document.body.addEventListener('dragover', dragOver, false);
-    document.body.addEventListener('drop', drop, false);
+   
+
+    
+    document.getElementById('float-layer').addEventListener('mousedown', mouseDown, false);
+    window.addEventListener('mouseup', mouseUp, false);
+    
+
+    function mouseUp() {
+        window.removeEventListener('mousemove', divMove, true);
+    }
+
+    function mouseDown(e) {
+        window.addEventListener('mousemove', divMove, true);
+    }
+
+    function divMove(e) {
+        console.log(e);       
+        var div = document.getElementById('float-layer');
+        div.style.top = e.clientY + 'px';
+        div.style.left = e.clientX + 'px';
+    }
+
+    // let floatLayer = document.getElementById('float-layer');
+    // floatLayer.draggable = "true"; //THML5全局属性
+    // floatLayer.addEventListener('dragstart', dragStart, false);
+    // document.body.addEventListener('dragover', dragOver, false);
+    // document.body.addEventListener('drop', drop, false);
 
 
     //弹出浮出层
@@ -82,7 +104,7 @@
 
     }
 
-    
+
     function dragStart(event) {
         let style = window.getComputedStyle(event.target, null);
         //设置窗口初始的left,top的值
