@@ -46,41 +46,7 @@
     <script type="text/javascript">
     //打开浮出层
     let openFloatLayerBtn = document.getElementById('open-float-layer');
-    openFloatLayerBtn.onclick = () => openFloatLayer('drag me');
-    //关闭浮出层函数
-    function closeFloatLayer() {
-        let floatLayerContainer = document.getElementById('float-layer-container');
-        floatLayerContainer.style.display = 'none';
-    }
-    //设置弹窗可拖动       
-   
-
-    
-    document.getElementById('float-layer').addEventListener('mousedown', mouseDown, false);
-    window.addEventListener('mouseup', mouseUp, false);
-    
-
-    function mouseUp() {
-        window.removeEventListener('mousemove', divMove, true);
-    }
-
-    function mouseDown(e) {
-        window.addEventListener('mousemove', divMove, true);
-    }
-
-    function divMove(e) {
-        console.log(e);       
-        var div = document.getElementById('float-layer');
-        div.style.top = e.clientY + 'px';
-        div.style.left = e.clientX + 'px';
-    }
-
-    // let floatLayer = document.getElementById('float-layer');
-    // floatLayer.draggable = "true"; //THML5全局属性
-    // floatLayer.addEventListener('dragstart', dragStart, false);
-    // document.body.addEventListener('dragover', dragOver, false);
-    // document.body.addEventListener('drop', drop, false);
-
+    openFloatLayerBtn.onclick = () => openFloatLayer('drag me', '500px', '400px');
 
     //弹出浮出层
     function openFloatLayer(info, width, height) {
@@ -89,8 +55,8 @@
         floatLayer.style.top = '50%';
         floatLayer.style.left = '50%';
         //自定义宽高
-        width ? floatLayer.style.width = width : '';
-        height ? floatLayer.style.height = height : '';
+        floatLayer.style.width = width && '';
+        floatLayer.style.height = height && '';
         let floatLayerContainer = document.getElementById('float-layer-container');
         document.getElementById('float-layer-info').innerHTML = info;
         floatLayerContainer.style.display = 'block';
@@ -102,28 +68,41 @@
         let closeFloatLayerBtn = document.getElementsByClassName('close-float-layer');
         Array.from(closeFloatLayerBtn).forEach((element) => element.onclick = closeFloatLayer);
 
-    }
+        //关闭浮出层函数
+        function closeFloatLayer() {
+            let floatLayerContainer = document.getElementById('float-layer-container');
+            floatLayerContainer.style.display = 'none';
+        }
 
 
-    function dragStart(event) {
-        let style = window.getComputedStyle(event.target, null);
-        //设置窗口初始的left,top的值
-        event.dataTransfer.setData("text/plain",
-            (parseInt(style.getPropertyValue("left"), 10) - event.clientX) + ',' + (parseInt(style.getPropertyValue("top"), 10) - event.clientY));
-    }
 
-    function drop(event) {
-        //获取窗口初始的left,top的值
-        let offset = event.dataTransfer.getData("text/plain").split(',');
-        floatLayer.style.left = (event.clientX + parseInt(offset[0], 10)) + 'px';
-        floatLayer.style.top = (event.clientY + parseInt(offset[1], 10)) + 'px';
-        event.preventDefault();
-        return false;
-    }
+        //设置弹窗可拖动       
+        floatLayer.draggable = "true"; //THML5全局属性
+        floatLayer.addEventListener('dragstart', dragStart, false);
+        document.body.addEventListener('dragover', dragOver, false);
+        document.body.addEventListener('drop', drop, false);
 
-    function dragOver(event) {
-        event.preventDefault();
-        return false;
+        function dragStart(event) {
+            let style = window.getComputedStyle(event.target, null);
+            //设置窗口初始的left,top的值
+            event.dataTransfer.setData("text/plain",
+                (parseInt(style.getPropertyValue("left"), 10) - event.clientX) + ',' + (parseInt(style.getPropertyValue("top"), 10) - event.clientY));
+        }
+
+        function drop(event) {
+            //获取窗口初始的left,top的值
+            let offset = event.dataTransfer.getData("text/plain").split(',');
+            floatLayer.style.left = (event.clientX + parseInt(offset[0], 10)) + 'px';
+            floatLayer.style.top = (event.clientY + parseInt(offset[1], 10)) + 'px';
+            event.preventDefault();
+            return false;
+        }
+
+        function dragOver(event) {
+            event.preventDefault();
+            return false;
+        }
+
     }
     </script>
 </body>
