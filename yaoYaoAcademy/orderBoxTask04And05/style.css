@@ -92,7 +92,9 @@ tr:nth-child(6) td:nth-child(6) {
 	border-top: 10px solid blue;
 	margin: -1px;	
 }
-
+.ol-wrapper {
+	margin-top: -100px;
+}
 
 
 
@@ -107,7 +109,9 @@ tr:nth-child(6) td:nth-child(6) {
 
 .submit-wrapper {
 	margin-top: 20px;
+	
 	display: flex;
+	justify-content: flex-start;
 	flex-flow: row nowrap;
 }
 .form-control {
@@ -124,15 +128,22 @@ button {
 }
 .btn {
 	display: inline-block;
-	padding: 6px 12px;
+	padding: 8px 12px;
 	background-color: #fff;
 	border: 1px solid #ccc;
 	border-radius: 4px;
 	margin-left: 20px;
 }
+.btn-box-game {
+	width: 80px;
+	color: #fff;
+	border-color: #5197f8;
+	background-color: #5197f8;
+	border-radius: 2px;
+}
 
 .btn:hover {
-	background-color: #eee;
+	background-color: #3058FC;
 }
 
 

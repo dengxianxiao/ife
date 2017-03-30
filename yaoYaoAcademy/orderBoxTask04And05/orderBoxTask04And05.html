@@ -158,10 +158,26 @@
                 </tr>
             </table>
             <div class="submit-wrapper">
-                <label for="">
+                <button class="btn btn-box-game" id="go">GO</button>
+                <button class="btn btn-box-game" id="turn-left">TUNLEF</button>
+                <button class="btn btn-box-game" id="turn-right">TUNRIG</button>
+                <button class="btn btn-box-game" id="turn-back">TUNBAC</button>
+            </div>
+            <div class="submit-wrapper">
+                <button class="btn btn-box-game" id="tra-left">TRALEF</button>
+                <button class="btn btn-box-game" id="tra-right">TRARIG</button>
+                <button class="btn btn-box-game" id="tra-top">TRATOP</button>
+                <button class="btn btn-box-game" id="tra-bottom">TRABOT</button>
+            </div>
+            <div class="submit-wrapper">
+                <button class="btn btn-box-game" id="move-left">MOVLEF</button>
+                <button class="btn btn-box-game" id="move-right">MOVRIG</button>
+                <button class="btn btn-box-game" id="move-top">MOVTOP</button>
+                <button class="btn btn-box-game" id="move-bottom">MOVBOT</button>
+                <!-- <label for="">
                     <input id="input-action" type="text" class="form-control">
                 </label>
-                <button id="submit-action" class="btn">执行</button>
+                <button id="submit-action" class="btn">执行</button> -->
             </div>
         </div>
         <div class="ol-wrapper">
@@ -183,7 +199,8 @@
     </div>
     <script type="text/javascript">
     //box相关参数，左上角为原点
-    let boxGame = function(x, y, change, width, tdNumber, rotate, topOrLeft, direction) {
+    let boxGame = function(box, x, y, change, width, tdNumber, rotate, topOrLeft, direction) {
+        this.box = box;
         this.x = x; //x轴离原点距离
         this.y = y; //y轴离原点距离
         this.change = change; //每次变化的值，可能值为40，-40，值和方形宽度一致      
@@ -228,7 +245,7 @@
             //求出旋转后的方向
             let dir;
             directionArr.forEach((e, i) =>
-                e == cur.direction ? (i === 0 ? dir = directionArr[3] : dir = directionArr[i - 1]) : '');
+                e == this.direction ? (i === 0 ? dir = directionArr[3] : dir = directionArr[i - 1]) : '');
             //改变this.change，左上角为原点，判断下一步往哪走
             this.direction = dir;
             this.change = this.judgeChangValue();
@@ -345,61 +362,36 @@
 
 
     //初始化游戏
-    let cur = new boxGame(200, 200, 40, 40, 10, 0, 'left', 'right');
-
-    //提交按钮
-    let submitAction = document.getElementById('submit-action');
-    submitAction.onclick = () => {
-        let inputAction = document.getElementById('input-action').value;
-        if (!inputAction) {
-            alert('请输入动作');
-        }
+    (function() {
         let box = document.getElementById('box');
+        let cur = new boxGame(box, 200, 200, 40, 40, 10, 0, 'left', 'right');
 
-        console.log(cur);
-        switch (inputAction) {
-            case 'GO':
-                cur.go();
-                break;
-            case 'TUNLEF':
-                cur.tunLef();
-                break;
-            case 'TUNRIG':
-                cur.tunRig();
-                break;
-            case 'TUNBAC':
-                cur.tunBac();
-                break;
 
-            case 'TRALEF':
-                cur.traLef();
-                break;
-            case 'TRATOP':
-                cur.traTop();
-                break;
-            case 'TRARIG':
-                cur.traRig();
-                break;
-            case 'TRABOT':
-                cur.traBot();
-                break;
+        document.getElementById('go').onclick = () => cur.go();
 
-            case 'MOVLEF':
-                cur.movLef();
-                break;
-            case 'MOVTOP':
-                cur.movTop();
-                break;
-            case 'MOVRIG':
-                cur.movRig();
-                break;
-            case 'MOVBOT':
-                cur.movBot();
-                break;
-        }
+        document.getElementById('turn-left').onclick = () => cur.tunLef();
 
-    };
+        document.getElementById('turn-right').onclick = () => cur.tunRig();
 
+        document.getElementById('turn-back').onclick = () => cur.tunBac();
+
+        document.getElementById('tra-left').onclick = () => cur.traLef();
+
+        document.getElementById('tra-top').onclick = () => cur.traTop();
+
+        document.getElementById('tra-right').onclick = () => cur.traRig();
+
+        document.getElementById('tra-bottom').onclick = () => cur.traBot();
+
+        document.getElementById('move-left').onclick = () => cur.movLef();
+
+        document.getElementById('move-top').onclick = () => cur.movTop();
+
+        document.getElementById('move-right').onclick = () => cur.movRig();
+
+        document.getElementById('move-bottom').onclick = () => cur.movBot();
+
+    })();
 
     // function turnDirection(className) {
     //     [].slice.call(document.querySelectorAll('div.read')).map((i) => i.classList.add(className));
