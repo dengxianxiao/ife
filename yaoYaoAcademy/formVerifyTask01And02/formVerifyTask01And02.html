@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Form Verify Task 01 02</title>
+    <title>Form validate Task 01 02</title>
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
@@ -29,12 +29,12 @@
                 必须，长度为8~16位字母和数字组合
             </div>
             <div class="row form-horizontal">
-                <label for="passwordAgain" class="col-md-2 username">密码确认</label>
+                <label for="passwordConfirm" class="col-md-2 username">密码确认</label>
                 <div class="col-md-9">
-                    <input class="form-control" type="password" name="passwordAgain" id="passwordAgain">
+                    <input class="form-control" type="password" name="passwordConfirm" id="passwordConfirm">
                 </div>
             </div>
-            <div id="help-passwordAgain" class="row help-row col-md-offset-2 col-md-9">
+            <div id="help-passwordConfirm" class="row help-row col-md-offset-2 col-md-9">
                 必须，长度为8~16位字母和数字组合
             </div>
             <div class="row form-horizontal">
@@ -74,179 +74,197 @@
         </div>
     </main>
     <script type="text/javascript">
-    let inputArr = document.getElementsByTagName('input');
-    let submitForm = document.getElementById('submit-form');
-    let correct = [];
-    for (let i = 0; i < 5; i++) {
-        correct.push(false);
-    }
+    (function(window) {
 
-    submitForm.onsubmit = () => {
-        Array.from(inputArr).forEach((element) => {
-            //提交时触发所有失去焦点事件
-            element.focus();
-            element.blur();
-        });
-        //判断是否所有的值都输入正确
-        if (!correct.every((value) => value === true)) {
+        const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/; //8-16位字符数字组合
+        const emailRegex = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+        const cellphoneRegex = /(13\d|14[57]|15[^4,\D]|17[678]|18\d)\d{8}|170[059]\d{7}/;
+
+        let formValidator = function(formId) {
+            //more...
+        };
+
+        //表单校验原型链
+        (function() {
+            this.validateUsername = function(username) {
+                let len = username.replace(/[^\u0000-\u00ff]/g, '**').length;
+                return (len >= 4 && len <= 16);
+            };
+            this.validatePassword = function(password) {
+                return passwordRegex.test(password);
+            };
+            this.validatePasswordConfirm = function(password, passwordConfirm) {
+                return password == passwordConfirm;
+            };
+            this.validateCellphone = function(cellphone) {
+                return cellphoneRegex.test(cellphone);
+            };
+            this.validateEmail = function(email) {
+                return emailRegex.test(email);
+            };
+
+        }).call(formValidator.prototype);
+
+
+        window.formValidator = formValidator; //改变作用域，外部可访问
+    })(window);
+
+
+    (function() {
+
+        let submitForm = document.getElementById('submit-form');
+        let inputArr = submitForm.getElementsByTagName('input');
+        let validator = new formValidator(submitForm);
+
+
+        submitForm.onsubmit = () => {
+            Array.from(inputArr).forEach((element) => {
+                //提交时触发所有失去焦点事件
+                element.focus();
+                element.blur();
+            });
+            //判断是否所有的值都输入正确
+            if (correct.every((value) => value === true)) {
+                modalDisplay('modal-dialog', '提交成功');
+                return false;
+            }
             modalDisplay('modal-dialog', '输入有误，请修改错误信息');
             return false;
-        }
-        modalDisplay('modal-dialog', '提交成功');
-        return false;
-    };
-
-    //为每个输入框添加点击，失去焦点事件
-    Array.from(inputArr).forEach((element) => {
-        let inputIdValue = element.getAttribute('id');
-        let helpId = document.getElementById('help-' + inputIdValue);
-
-        //获得焦点
-        element.onfocus = () => helpId.style.display = 'block';
-
-        //失去焦点
-        element.onblur = () => {
-            helpId.style.opacity = 1;
-            let inputValue = document.getElementById(inputIdValue).value;
-            let len = byteLength(inputValue);
-            //失去焦点没有值时
-            if (len <= 0) {
-                setupHelp(inputHelp[inputIdValue].info.none, inputHelp.color.error);
-
-            } else {
-                switch (inputIdValue) {
-                    //校验用户名
-                    case 'username':
-                        {
-                            correct[0] = setupHelpCondition(len >= 4 && len <= 16);
-                        }
-                        break;
-                    case 'password':
-                        {
-                            let regex = /^(?=.*?[A-Za-z])(?=.*?[0-9]).{8,16}$/g;
-                            correct[1] = setupHelpCondition(regex.test(inputValue));
-                        }
-                        break;
-                    case 'passwordAgain':
-                        {
-                            let password = document.getElementById('password').value;
-
-                            correct[2] = setupHelpCondition(inputValue == password);
-                        }
-                        break;
-                    case 'email':
-                        {
-                            let regex = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
-                            correct[3] = setupHelpCondition(regex.test(inputValue));
-                        }
-                        break;
-                    case 'cellphone':
-                        {
-                            let regex = /(13\d|14[57]|15[^4,\D]|17[678]|18\d)\d{8}|170[059]\d{7}/;
-                            correct[4] = setupHelpCondition(regex.test(inputValue));
-
-                        }
-                        break;
-                }
-            }
-
-            //校验条件是否正确并返回相应信息
-            function setupHelpCondition(condition) {
-                // condition === true ?
-                //     setupHelp(inputHelp[inputIdValue].info.correct, inputHelp.color.correct) :
-                //     setupHelp(inputHelp[inputIdValue].info.error, inputHelp.color.error);
-                if (condition) {
-                    setupHelp(inputHelp[inputIdValue].info.correct, inputHelp.color.correct);
-                    return true;
-                } else {
-                    setupHelp(inputHelp[inputIdValue].info.error, inputHelp.color.error);
-                    return false;
-                }
-            }
-
-            //设置提示信息和提示颜色
-            function setupHelp(helpInfo, color) {
-                helpId.innerHTML = helpInfo;
-                helpId.style.color = color;
-                element.style.borderColor = color;
-            }
 
         };
 
-    }); //forEach
+        //每个输入框默认为false
+        let correct = [];
+        for (let i = 0; i < inputArr.length; i++) {
+            correct.push(false);
+        }
+        //为每个输入框添加点击，失去焦点事件
+        Array.from(inputArr).forEach((element) => {
+            let inputId = element.getAttribute('id');
+            let helpId = document.getElementById('help-' + inputId);
+            //获得焦点显示提示信息
+            element.onfocus = () => helpId.style.display = 'block';
 
-    //提示信息
-    const inputHelp = {
-        'username': {
-            'info': {
+            //失去焦点
+            element.onblur = () => {
+                helpId.style.opacity = 1;
+                let inputValue = document.getElementById(inputId).value;
+
+                //失去焦点没有值时
+                if (inputValue.length <= 0) {
+                    setupHelp(inputHelp[inputId].none, inputHelp.color.error);
+
+                } else {
+                    switch (inputId) {
+                        //校验用户名
+                        case 'username':
+                            {
+                                correct[0] = validator.validateUsername(inputValue);
+                                
+                                setupHelpCondition(correct[0]);
+                            }
+                            break;
+                        case 'password':
+                            {
+                                correct[1] = validator.validatePassword(inputValue);
+                                setupHelpCondition(correct[1]);
+                            }
+                            break;
+                        case 'passwordConfirm':
+                            {
+                                let password = document.getElementById('password').value;
+                                correct[2] = validator.validatePasswordConfirm(password, inputValue);
+                                setupHelpCondition(correct[2]);
+                            }
+                            break;
+                        case 'email':
+                            {
+                                correct[3] = validator.validateEmail(inputValue);
+                                setupHelpCondition(correct[3]);
+                            }
+                            break;
+                        case 'cellphone':
+                            {
+                                correct[4] = validator.validateCellphone(inputValue);
+                                setupHelpCondition(correct[4]);
+                            }
+                            break;
+                    }
+                }
+
+                //校验条件是否正确并返回相应信息
+                function setupHelpCondition(condition) {
+                    condition ? setupHelp(inputHelp[inputId].correct, inputHelp.color.correct) :
+                        setupHelp(inputHelp[inputId].error, inputHelp.color.error);
+
+                }
+
+                //设置提示信息和提示颜色
+                function setupHelp(helpInfo, color) {
+                    helpId.innerHTML = helpInfo;
+                    helpId.style.color = color;
+                    element.style.borderColor = color;
+                }
+
+            };
+
+        }); //forEach
+
+        //提示信息
+        const inputHelp = {
+            'username': {
                 'none': '用户名不能为空！',
                 'error': '用户名格式不正确！',
                 'correct': '用户名格式正确！'
             },
-        },
-        'password': {
-            'info': {
+            'password': {
                 'none': '密码不能为空！',
-                'error': '密码格式不正确！',
+                'error': '密码格式应为8-16位字母数字组合！',
                 'correct': '密码可用！'
             },
-        },
-        'passwordAgain': {
-            'info': {
+            'passwordConfirm': {
                 'none': '密码确认不能为空！',
                 'error': '两次输入的密码不一致！',
                 'correct': '两次输入密码一致！'
             },
-        },
-        'email': {
-            'info': {
+            'email': {
                 'none': '邮箱不能为空！',
                 'error': '邮箱格式不正确！',
                 'correct': '邮箱格式正确！'
             },
-        },
-        'cellphone': {
-            'info': {
+            'cellphone': {
                 'none': '手机号码不能为空！',
                 'error': '手机号码格式不正确！',
                 'correct': '手机号码格式正确！'
             },
-        },
+            'color': {
+                'error': '#FC5151',
+                'correct': '#26AC26',
+            }
+        };
+    })();
 
-        'color': {
-            'error': '#FC5151',
-            'correct': '#26AC26',
+
+    (function() {
+        //关闭弹窗按钮
+        let closeBtn = document.getElementById('close-btn');
+        closeBtn.onclick = () => modalHidden('modal-dialog');
+        let closeX = document.getElementById('close-x');
+        closeX.onclick = () => modalHidden('modal-dialog');
+
+        //弹窗隐藏
+        function modalHidden(targetId) {
+            document.getElementById(targetId).style.display = 'none';
         }
-    };
-
-
-
-    //关闭弹窗按钮
-    let closeBtn = document.getElementById('close-btn');
-    closeBtn.onclick = () => modalHidden('modal-dialog');
-    let closeX = document.getElementById('close-x');
-    closeX.onclick = () => modalHidden('modal-dialog');
-
-    //弹窗隐藏
-    function modalHidden(targetId) {
-        document.getElementById(targetId).style.display = 'none';
-    }
-    //弹窗显示
-    function modalDisplay(targetId, value) {
-        document.getElementById('modal-value').innerHTML = value;
-        document.getElementById(targetId).style.display = 'block';
-    }
-
-
-    //求字符串长度
-    function byteLength(str) {
-        let len = 0;
-        for (let i = 0; i < str.length; i++) {
-            let code = str.charCodeAt(i);
-            (code >= 0 && code <= 128) ? len++ : len += 2;
+        //弹窗显示
+        function modalDisplay(targetId, value) {
+            document.getElementById('modal-value').innerHTML = value;
+            document.getElementById(targetId).style.display = 'block';
         }
-        return len;
-    }
+
+        window.modalDisplay = modalDisplay;
+        window.modalHidden = modalHidden;
+    })(window);
     </script>
 </body>
 
