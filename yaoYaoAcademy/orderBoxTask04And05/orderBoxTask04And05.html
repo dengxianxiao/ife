@@ -174,10 +174,7 @@
                 <button class="btn btn-box-game" id="move-right">MOVRIG</button>
                 <button class="btn btn-box-game" id="move-top">MOVTOP</button>
                 <button class="btn btn-box-game" id="move-bottom">MOVBOT</button>
-                <!-- <label for="">
-                    <input id="input-action" type="text" class="form-control">
-                </label>
-                <button id="submit-action" class="btn">执行</button> -->
+                
             </div>
         </div>
         <div class="ol-wrapper">
@@ -355,6 +352,14 @@
             let change;
             (this.direction == 'top' || this.direction == 'left') ? change = -this.width: change = this.width;
             return change;
+        };
+
+        this.changeRotateToZero = function(rotate) {
+            if (rotate % 360 === 1 || rotate % -360 === -1) {
+                return 0;
+            } else {
+                return rotate;
+            }
         };
     }).call(boxGame.prototype);
 

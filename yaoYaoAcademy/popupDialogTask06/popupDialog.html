@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Popup Dialog Task 06</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+    <main class="container">
+        <div id="popup-dialog-container" class="popup-dialog-container">
+            <div id="popup-dialog" class="popup-dialog">
+                <header id="popup-dialog-header">
+                    <span class="header-title">浮出层例子</span>
+                    <a class="header-x close-popup-dialog" href="#">x</a>
+                </header>
+                <div class="popup-dialog-body">
+                    <div id="popup-dialog-info">浮出来看一下</div>
+                </div>
+                <div class="popup-dialog-footer">
+                    <button class="close-popup-dialog">确定</button>
+                    <button class="close-popup-dialog">取消</button>
+                </div>
+                <!-- <div id="resize-right"></div>
+                <div id="resize-bottom"></div> -->
+            </div>
+        </div>
+        <div class="other-info">
+            <header>The position property specifies the type of positioning method used for an element (static, relative, fixed or absolute).</header>
+            <ul>
+                <li>static
+                    <p>HTML elements are positioned static by default. Static positioned elements are not affected by the top, bottom, left, and right properties.</p>
+                </li>
+                <li>relative
+                    <p>An element with position: relative; is positioned relative to its normal position. Setting the top, right, bottom, and left properties of a relatively-positioned element will cause it to be adjusted away from its normal position. Other content will not be adjusted to fit into any gap left by the element.</p>
+                </li>
+                <li>absolute
+                    <p>An element with position: absolute; is positioned relative to the nearest positioned ancestor (instead of positioned relative to the viewport, like fixed). However; if an absolute positioned element has no positioned ancestors, it uses the document body, and moves along with page scrolling.</p>
+                </li>
+                <li>fixed
+                    <p>An element with position: fixed; is positioned relative to the viewport, which means it always stays in the same place even if the page is scrolled. The top, right, bottom, and left properties are used to position the element. A fixed element does not leave a gap in the page where it would normally have been located.</p>
+                </li>
+            </ul>
+            <div class="input-wrapper">
+                <label for="popup-info">弹窗信息</label>
+                <input type="text" id="popup-info" name="popup-info" class="form-control">
+                <label for="popup-width">弹窗宽度</label>
+                <input type="text" id="popup-width" name="popup-width" class="form-control">
+                <label for="height-input">弹窗高度</label>
+                <input type="text" id="popup-height" name="popup-height" class="form-control">
+                <button id="open-popup-dialog" class="btn btn-default">浮出层</button>
+            </div>
+        </div>
+    </main>
+    <script type="text/javascript">
+    //浮出层
+    (function(window) {
+        let popupDialog = function(info, width, height) {
+            this.info = info;
+            this.width = width;
+            this.height = height;
+        };
+        let popupContainer = document.getElementById('popup-dialog-container');
+        let popup = document.getElementById('popup-dialog');
+
+        popupDialog.prototype.openPopup = function() {
+            //每次打开时都在中间
+            popup.style.top = '50%';
+            popup.style.left = '50%';
+            //自定义宽高
+            popup.style.width = this.width || '';
+            popup.style.height = this.height || '';
+            document.getElementById('popup-dialog-info').innerHTML = this.info;
+            popupContainer.style.display = 'block';
+        };
+
+        //关闭浮出层函数
+        popupDialog.prototype.closePopup = function() {
+            popupContainer.style.display = 'none';
+        };
+
+        //按钮添加关闭功能
+        let closePopupBtn = document.getElementsByClassName('close-popup-dialog');
+        Array.from(closePopupBtn).forEach((element) => element.onclick = () => popupContainer.style.display = 'none');
+
+        //点击弹窗外时关闭弹窗
+        window.onclick = (event) => event.target == popupContainer ? popupContainer.style.display = 'none' : '';
+
+        //设置窗口可拖动
+        let popupHeader = document.getElementById('popup-dialog-header');
+        popupHeader.addEventListener('mousedown', function(event) {
+            let isDrag = true;
+            let popupX = event.clientX - popup.offsetLeft;
+            let popupY = event.clientY - popup.offsetTop;
+            document.body.addEventListener('mousemove', function(event) {
+                if (isDrag) {
+                    popup.style.left = event.clientX - popupX + 'px';
+                    popup.style.top = event.clientY - popupY + 'px';
+                }
+            });
+            document.body.addEventListener('mouseup', () => isDrag = false);
+        });
+
+
+        window.popupDialog = popupDialog; //设置弹窗对象为全局作用域
+    })(window);
+
+
+
+
+
+
+    (function() {
+        //打开浮出层
+        let openPopupBtn = document.getElementById('open-popup-dialog');
+        openPopupBtn.onclick = () => {
+            let popupWidth = document.getElementById('popup-width').value;
+            let popupHeight = document.getElementById('popup-height').value;
+            let popupInfo = document.getElementById('popup-info').value || 'drag header';
+            let popup = new popupDialog(popupInfo, popupWidth + 'px', popupHeight + 'px');
+            popup.openPopup();
+        };
+    })();
+    </script>
+</body>
+
+</html>
