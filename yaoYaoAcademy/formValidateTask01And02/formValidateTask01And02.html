@@ -111,11 +111,10 @@
 
 
     (function() {
-
+        //需要校验的表单
         let submitForm = document.getElementById('submit-form');
         let inputArr = submitForm.getElementsByTagName('input');
         let validator = new formValidator(submitForm);
-
 
         submitForm.onsubmit = () => {
             Array.from(inputArr).forEach((element) => {
@@ -159,8 +158,7 @@
                         //校验用户名
                         case 'username':
                             {
-                                correct[0] = validator.validateUsername(inputValue);
-                                
+                                correct[0] = validator.validateUsername(inputValue);                               
                                 setupHelpCondition(correct[0]);
                             }
                             break;

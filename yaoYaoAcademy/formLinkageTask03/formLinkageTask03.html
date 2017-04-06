@@ -25,14 +25,14 @@
                 <div class="col-md-3 city-wrapper">
                     <select id="city" name="city" class="form-control">
                     </select>
-                    <span class="previous-icon"></span>
-                    <span class="next-icon"></span>
+                    <span class="previous-icon previous-btn"></span>
+                    <span class="next-icon next-btn"></span>
                 </div>
                 <div class="col-md-5 university-wrapper">
                     <select id="university" name="university" class="form-control">
                     </select>
-                    <span class="previous-icon"></span>
-                    <span class="next-icon"></span>
+                    <span class="previous-icon previous-btn"></span>
+                    <span class="next-icon next-btn"></span>
                 </div>
             </div>
             <div id="not-student-content" class="not-student-content clearfix">
@@ -44,59 +44,52 @@
         </div>
     </main>
     <script type="text/javascript">
-    const cityUniversity = [{
-        'cityValue': 'beijing',
-        'cityName': '北京',
-        'university': [{
-            'value': 'Peking University',
-            'name': '北京大学'
-        }, {
-            'value': 'Tsinghua University',
-            'name': '清华大学'
-        }]
-    }, {
-        'cityValue': 'shanghai',
-        'cityName': '上海',
-        'university': [{
-            'value': 'Fudan University',
-            'name': '复旦大学'
-        }, {
-            'value': 'Shanghai Jiao Tong University',
-            'name': '上海交通大学'
-        }]
-    }];
-
-    //城市改变时修改大学列表
-    function changeUniversity() {
-        let cityValue = document.getElementById('city').value;
-        let universitySelect = document.getElementById('university');
-        if (cityValue) {
-            //清除所有子节点
-            universitySelect.innerHTML = '';
-            //修改大学列表
-            cityUniversity.forEach((city) => {
-                if (city.cityValue == cityValue) {
-                    city.university.forEach((element) => {
-                        let option = document.createElement('option');
-                        option.setAttribute('value', element.value);
-                        option.innerHTML = element.name;
-                        universitySelect.appendChild(option);
-                    });
-                }
-            });
-        }
-    }
-
-   
-
     (function() {
+
+        const cityUniversity = [{
+            'cityValue': 'beijing',
+            'cityName': '北京',
+            'university': [{
+                'value': 'Peking University',
+                'name': '北京大学'
+            }, {
+                'value': 'Tsinghua University',
+                'name': '清华大学'
+            }, {
+                'value': 'Beihang University',
+                'name': '北京航空航天大学'
+            }]
+        }, {
+            'cityValue': 'shanghai',
+            'cityName': '上海',
+            'university': [{
+                'value': 'Fudan University',
+                'name': '复旦大学'
+            }, {
+                'value': 'Shanghai Jiao Tong University',
+                'name': '上海交通大学'
+            }, {
+                'value': 'Shanghai University',
+                'name': '上海大学'
+            }]
+        }, {
+            'cityValue': 'guangzhou',
+            'cityName': '广州',
+            'university': [{
+                'value': 'Sun Yat-sen University',
+                'name': '中山大学'
+            }, {
+                'value': 'South China University of Technology',
+                'name': '华南理工大学'
+            }, {
+                'value': 'Jinan University',
+                'name': '暨南大学'
+            }]
+        }];
         //初始化城市列表
         let citySelect = document.getElementById('city');
         for (let i = 0; i < cityUniversity.length; i++) {
-            let option = document.createElement('option');
-            option.setAttribute('value', cityUniversity[i].cityValue);
-            option.innerHTML = cityUniversity[i].cityName;
-            citySelect.appendChild(option);
+            createOptionAttr(citySelect, cityUniversity[i].cityValue, cityUniversity[i].cityName);
         }
         //页面初始化时查询
         if (citySelect.value) {
@@ -104,6 +97,78 @@
         }
         //城市改变时修改大学列表
         citySelect.onchange = changeUniversity;
+
+        //城市改变时修改大学列表
+        function changeUniversity() {
+            let cityValue = document.getElementById('city').value;
+            let universitySelect = document.getElementById('university');
+            if (cityValue) {
+                //清除所有子节点
+                universitySelect.innerHTML = '';
+                //修改大学列表
+                cityUniversity.forEach((city) => {
+                    if (city.cityValue == cityValue) {
+                        city.university.forEach((element) =>
+                            createOptionAttr(universitySelect, element.value, element.name));
+                    }
+                });
+            }
+        }
+
+        function createOptionAttr(parent, value, innerHTML) {
+            let option = document.createElement('option');
+            option.setAttribute('value', value);
+            option.innerHTML = innerHTML;
+            parent.appendChild(option);
+        }
+
+        //上一个按钮
+        let previousBtn = document.querySelectorAll('.previous-btn');
+        Array.from(previousBtn).forEach((e) => {
+            e.onclick = () => {
+                let select = e.parentNode.getElementsByTagName('select')[0];                
+                let selectId = select.getAttribute('id');
+                let option = select.getElementsByTagName('option');
+                
+                for (let i = 0; i < option.length; i++) {
+                    if (option[i].value == select.value) {
+                        if (i === 0) {
+                            select.value = option[option.length - 1].value;
+                            selectId == 'city' ? changeUniversity() : '';
+                            break;
+                        } else {
+                            select.value = option[i - 1].value;
+                            selectId == 'city' ? changeUniversity() : '';
+                            break;
+                        }
+                    }
+                }
+            };
+        });
+
+        //下一个按钮
+        let nextBtn = document.querySelectorAll('.next-btn');
+        Array.from(nextBtn).forEach((e) => {
+            e.onclick = () => {
+                let select = e.parentNode.getElementsByTagName('select')[0];                
+                let selectId = select.getAttribute('id');
+                let option = select.getElementsByTagName('option');
+                
+                for (let i = 0; i < option.length; i++) {
+                    if (option[i].value == select.value) {
+                        if (i == option.length - 1) {
+                            select.value = option[0].value;
+                            selectId == 'city' ? changeUniversity() : '';
+                            break;
+                        } else {
+                            select.value = option[i + 1].value;
+                            selectId == 'city' ? changeUniversity() : '';
+                            break;
+                        }
+                    }
+                }
+            };
+        });
 
 
         //在校生，非在校生切换
