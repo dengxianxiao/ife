@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>vue 03</title>
+</head>
+
+<body>
+    <div id="vm1">
+        <p>Original message: {{ message }}</p>
+        <p>Computed reversed message: {{ reverseMessage }}</p>
+        <p>Methods reversed message: {{ methodsReverseMessage() }}</p>
+        <p>{{ now }}</p>
+    </div>
+    <div id="vm2">{{ fullName }}</div>
+    <div id="vm3">{{ fullName }}</div>
+    <div id="vm4">
+        <p>
+            Ask a yes/no question:
+            <input type="text" name="name" v-model="question">
+        </p>
+        <p>
+            {{ answer }}
+        </p>
+    </div>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios@0.12.0/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/lodash@4.13.1/lodash.min.js"></script>
+    <script type="text/javascript">
+    var vm4 = new Vue({
+        el: '#vm4',
+        data: {
+            question: '',
+            answer: 'I cannot give you an answer until you ask a question!'
+        },
+        watch: {
+            question: function(newQuestion) {
+                this.answer = 'Waiting for you to stop typing...';
+                this.getAnswer();
+            }
+        },
+        methods: {
+            getAnswer: _.debounce(
+                function() {
+                    var vm = this;
+                    if (this.question.indexOf('?') === -1) {
+                        vm.answer = 'Question usually contain a question mark ?';
+                        return;
+                    }
+                    vm.answer = 'Thinking...';
+                    axios.get('https://yesno.wtf/api')
+                        .then(function(response) {
+                            vm.answer = _.capitalize(response.data.answer);
+                        })
+                        .catch(function(error) {
+                            vm.answer = 'Error! Could not reach the API.' + error;
+                        });
+                },
+                //等待
+                500
+            )
+        }
+    });
+
+    var vm3 = new Vue({
+        el: '#vm3',
+        data: {
+            firstName: 'Foo',
+            lastName: 'Boo'
+        },
+        computed: {
+            fullName: {
+                //getter
+                get: function() {
+                    console.log('你访问了fullName');
+                    return this.firstName + ' ' + this.lastName;
+                },
+                set: function(newName) {
+                    console.log('你设置了fullName');
+                    var name = newName.split(' ');
+                    this.firstName = name[0];
+                    this.lastName = name[name.length - 1];
+                }
+            }
+        }
+    });
+    var vm2 = new Vue({
+        el: '#vm2',
+        data: {
+            firstName: 'first',
+            lastName: 'last',
+            fullName: 'first last'
+        },
+        watch: {
+            firstName: function(val) {
+                this.fullName = val + ' ' + this.lastName;
+            },
+            lastName: function(val) {
+                this.fullName = this.firstName + ' ' + val;
+            }
+        }
+    });
+    var vm1 = new Vue({
+        el: '#vm1',
+        data: {
+            message: 'vue2.x',
+            now: Date.now()
+        },
+        computed: {
+            reverseMessage: function() {
+                return this.message.split('').reverse().join('');
+            }
+        },
+        methods: {
+            //方法不能喝上面的computed重名
+            methodsReverseMessage: function() {
+                return this.message.split('').reverse().join('');
+            }
+        }
+    });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Dynamic Data Binding 01</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+    let Observer = function(data) {
+        this.data = data;
+        this.walk(data);
+    };
+
+    (function() {
+        this.walk = function(obj) {
+            let val;
+            for (let key in obj) {
+                if (obj.hasOwnProperty(key)) {
+                    val = obj[key];
+
+                    if (typeof val === 'object') {
+                        new Observer(val);
+                    }
+
+                    this.convert(key, val);
+                }
+            }
+        };
+        this.convert = function(key, val) {
+            Object.defineProperty(this.data, key, {
+                enumerable: true,
+                configurable: true,
+                get: function() {
+                    console.log('你访问了' + key);
+                    return val;
+                },
+                set: function(newVal) {
+                    console.log('你设置了' + key + ' = ' + newVal);
+                    if (newVal === val) return;
+                    val = newVal;
+                }
+            });
+        };
+    }).call(Observer.prototype);
+
+    let app1 = new Observer({
+        name: 'youngwind',
+        age: 25
+    });
+    console.log(app1);
+    let app2 = new Observer({
+        university: 'bupt',
+        major: 'computer'
+    });   
+    console.log(app2);
+    </script>
+</body>
+
+</html>

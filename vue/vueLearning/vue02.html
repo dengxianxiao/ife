@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Vue2</title>
+</head>
+<style type="text/css">
+	.banana {
+		width: 20px;
+		height: 20px;
+		background-color: #ccc;
+	}
+</style>
+<body>
+    <div id="example">{{a}}</div>
+    <div v-html="rawHTML" id="vm2"></div>
+    <div v-bind:id="fruit" class="vm4"></div>
+    <input v-bind:disabled="condition" id="vm3"></input>
+    <div id="vm5">
+    	{{number + 1}}<br>
+    	{{ok ? 'yes' : 'no'}}<br>
+    	{{message.split('').reverse().join('')}}<br>
+    	<div v-bind:id=" 'list-' + id "></div>
+    </div>
+    <a id="vm6" v-bind:href="url">baidu</a>
+    <div id="vm7">
+    	<p>{{ message }}</p>
+    	<button v-on:click="reverseMessage">reverse</button>
+    </div>
+    <div id="vm8">{{ message | capitalize }}</div>
+    <div v-bind:id="rawId | formatId" class="vm9">{{ rawId }}</div>
+
+    
+
+
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script type="text/javascript">
+    
+
+    var vm9 = new Vue({
+    	el: '.vm9',
+    	data: {
+    		rawId: 'hello'
+    	},
+    	filters: {
+    		formatId: function(value) {
+    			if (!value) return '';
+    			value = value.toString();
+    			return value.toUpperCase();
+    		}
+    	}
+    });
+    var vm8 = new Vue({
+    	el: '#vm8',
+    	data: {
+    		message: 'vue2.x'
+    	},
+    	filters: {
+    		capitalize: function(value) {
+    			if (!value) return '';
+    			value = value.toString();
+    			return value.charAt(0).toUpperCase() + value.slice(1);
+    		}
+    	}
+    });
+    var vm7 = new Vue({
+    	el: '#vm7',
+    	data: {
+    		message: 'You Dont\'t know JS'
+    	},
+    	methods: {
+    		reverseMessage: function () {
+    			this.message = this.message.split('').reverse().join('');
+    		}
+    	}
+    });
+    
+    var vm6 = new Vue({
+    	el: '#vm6',
+    	data: {
+    		url: 'https://baidu.com'
+    	}
+    });
+    var vm5 = new Vue({
+    	el: '#vm5',
+    	data: {
+    		number: 5,
+    		ok: true,
+    		message: 'hello',
+    		id: 'you-know'
+    	}
+    });
+    var vm4 = new Vue({
+    	el: '.vm4',
+    	data: {
+    		fruit: 'banana'
+    	}
+    });
+    var vm3 = new Vue({
+    	el: '#vm3',
+    	data: {
+    		condition: true
+    	},
+    });
+
+    var vm2 = new Vue({
+    	el: '#vm2',
+    	data: {
+    		rawHTML: '<strong>hello</strong>'
+    	}
+    });
+
+    var vm = new Vue({
+        el: '#example',
+        data: data = {
+            a: 1
+        },
+
+        created: function() {
+            this.a = 10;
+            console.log('a is: ' + this.a);
+        }
+    });
+    </script>
+</body>
+
+</html>
