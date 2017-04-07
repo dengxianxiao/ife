@@ -13,13 +13,14 @@
         this.walk(data);
     };
 
+    //Observer原型链
     (function() {
         this.walk = function(obj) {
             let val;
             for (let key in obj) {
                 if (obj.hasOwnProperty(key)) {
                     val = obj[key];
-
+                    //递归访问深层次对象
                     if (typeof val === 'object') {
                         new Observer(val);
                     }
@@ -29,6 +30,8 @@
             }
         };
         this.convert = function(key, val) {
+        	//Object.defineProperty修改当前对象并返回
+        	//https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty#
             Object.defineProperty(this.data, key, {
                 enumerable: true,
                 configurable: true,
@@ -45,6 +48,8 @@
         };
     }).call(Observer.prototype);
 
+
+    //两个测试用例
     let app1 = new Observer({
         name: 'youngwind',
         age: 25
