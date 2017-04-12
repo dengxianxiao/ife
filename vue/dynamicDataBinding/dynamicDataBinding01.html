@@ -5,15 +5,59 @@
     <meta charset="UTF-8">
     <title>Dynamic Data Binding 01</title>
 </head>
-
+<div id="testEvent"></div>
 <body>
     <script type="text/javascript">
+    //发布订阅模式
+    let PubSub = function() {
+        this.handlers = {};
+    };
+    PubSub.prototype = {
+        //订阅
+        on: function(eventType, callback) {
+            let _this = this;
+            if (!(eventType in _this.handlers)) {
+                _this.handlers[eventType] = [];
+            }
+            _this.handlers[eventType].push(callback);
+
+            return this;
+
+        },
+        //发布
+        emit: function(eventType) {
+            let _this = this;
+            let handlerArgs = Array.prototype.slice.call(arguments, 1);
+            for (let i = 0; i < _this.handlers[eventType].length; i++) {
+                _this.handlers[eventType][i].apply(_this, handlerArgs);
+            }
+
+            return _this;
+        }
+    };
+    //发布订阅模式测试
+    let pubSub = new PubSub();
+    let on1 = pubSub.on('A', function(data) {
+        console.log('on1 emit = ' + data + ' 1111');
+    });
+    console.log(on1);
+    let on2 = pubSub.on('A', function(data) {
+        console.log('on2 emit = ' + data + ' 2222');
+    });
+    console.log(on2);
+    let emit = pubSub.emit('A', 'you know');
+    console.log(emit);
+
+
+
+    //监听对象
     let Observer = function(data) {
         this.data = data;
+        this.pubSub = new PubSub();
         this.walk(data);
     };
 
-    //Observer原型链
+    //Observer原型
     (function() {
         this.walk = function(obj) {
             let val;
@@ -30,8 +74,9 @@
             }
         };
         this.convert = function(key, val) {
-        	//Object.defineProperty修改当前对象并返回
-        	//https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty#
+            let _this = this;
+            //Object.defineProperty修改当前对象并返回
+            //https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty#
             Object.defineProperty(this.data, key, {
                 enumerable: true,
                 configurable: true,
@@ -39,17 +84,30 @@
                     console.log('你访问了' + key);
                     return val;
                 },
-                set: function(newVal) {
-                    console.log('你设置了' + key + ' = ' + newVal);
+                set: function(newVal) {                  
                     if (newVal === val) return;
+                    //发布事件
+                    if (_this.pubSub.handlers.hasOwnProperty(key)) {
+                        _this.pubSub.emit(key, val);
+                    }
+
+                    //如果新的值是对象，为每个值建立观察者                   
                     val = newVal;
+                    if (typeof newVal === 'object') {
+                        val = new Observer(newVal).data;
+                    } 
+                    console.log('你设置了' + key + ' = ' + newVal);
                 }
             });
+        };
+        //订阅事件
+        this.$watch = function(eventType, callback) {
+            this.pubSub.on(eventType, callback);
         };
     }).call(Observer.prototype);
 
 
-    //两个测试用例
+    //测试用例
     let app1 = new Observer({
         name: 'youngwind',
         age: 25
@@ -58,8 +116,32 @@
     let app2 = new Observer({
         university: 'bupt',
         major: 'computer'
-    });   
+    });
     console.log(app2);
+    let app3 = new Observer({
+        a: 1,
+        b: 2,
+        c: {
+            d: 3,
+            e: 4
+        }
+    });
+    console.log(app3);
+
+
+
+
+
+    //自定义事件
+    let test = document.getElementById('testEvent');
+    let evt = document.createEvent('Event');
+    evt.initEvent('customEvent', true, true);
+    test.addEventListener('customEvent', function () {
+        // console.log('cccc');
+    });
+    //触发事件
+    test.dispatchEvent(evt);
+
     </script>
 </body>
 
