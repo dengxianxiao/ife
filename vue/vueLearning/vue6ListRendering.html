@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>List Rendering</title>
+</head>
+
+<body>
+    <ul id="vm1">
+        <li v-for="(item, index) in items">
+            {{parentMessage}} - {{index}} - {{item.message}}
+        </li>
+    </ul>
+    <ul id="vm2">
+        <template v-for="(item, index) in items">
+            <li>{{item.message}}</li>
+            <li>{{index}}</li>
+        </template>
+    </ul>
+    <ul id="vm3">
+        <li v-for="(value, key, index) in object">
+            {{index}}.{{key}} : {{value}}
+        </li>
+    </ul>
+    <ul id="vm4">
+        <li v-for=" n in 4 ">
+            {{ n }}
+        </li>
+    </ul>
+    <div id="todo-list-example">
+        <input v-model="newTodoText" v-on:keyup.enter="addNewTodo" placeholder="Add a todo">
+        <ul>
+            <li is="todo-item" v-for="(todo, index) in todos" v-bind:title="todo" v-on:remove="todos.splice(index, 1)"></li>
+        </ul>
+    </div>
+    <ul id="vm5">
+    	<li v-for="item in items" :key="item.id">
+    		{{item.name}}
+    	</li>
+    </ul>
+    <ul id="vm6">
+    	<li v-for="todo in todos" v-if="todo.isComplete">
+    		{{todo.msg}}
+    	</li>
+    </ul>
+    <ul id="vm7" v-if="isComplete">
+    	<li v-for="todo in todos">
+    		{{todo}}
+    	</li>
+    </ul>
+    <ul id="vm8">
+    	<li v-for="n in evenNumbers">{{ n }}</li>
+    </ul>
+    <ul id="vm9">
+    	<li v-for="n in even(numbers)">{{ n }}</li>
+    </ul>
+    <script src="../vue.js"></script>
+    <script type="text/javascript">
+    var vm9 = new Vue({
+    	el: '#vm9',
+    	data: {
+    		numbers: [1,2,3,4,5,6,7,8]
+    	},
+    	methods: {
+    		even: function (numbers) {
+    			return numbers.filter(function (number) {
+    				return number % 2 !== 0;
+    			});
+    		}
+    	}
+    });
+    var vm8 = new Vue({
+    	el: '#vm8',
+    	data: {
+    		numbers: [1,2,3,4,5,6,7]
+    	},
+    	computed: {
+    		evenNumbers: function () {
+    			return this.numbers.filter(function (number) {
+    				return number % 2 === 0;
+    			});
+    		}
+    	}
+    });
+    var vm7 = new Vue({
+    	el: '#vm7',
+    	data: {
+    		isComplete: true,
+    		todos: [
+    			'one', 'two','three'
+    		]
+    	}
+    });
+    var vm6 = new Vue({
+    	el: '#vm6',
+    	data: {
+    		todos: [
+	    		{
+	    			msg: 'do it',
+	    			isComplete: true
+	    		},
+	    		{
+	    			msg: 'just do',
+	    			isComplete: false
+	    		}
+    		]
+    	}
+    });
+    var vm5 = new Vue({
+    	el: '#vm5',
+    	data: {
+    		items: [
+    			{
+    				id: 'name1',
+    				name: 'name1'
+    			},
+    			{
+    				id: 'name2',
+    				name: 'name2'
+    			}
+    		]
+    	}
+    });
+    Vue.component('todo-item', {
+        template: '\
+			<li>\ {{ title }}\
+    		<button v-on:click="$emit(\'remove\')">X</button>\
+			</li>\ ',
+
+        props: ['title']
+    });
+    new Vue({
+    	el: '#todo-list-example',
+    	data: {
+    		newTodoText: '',
+    		todos: [
+    			'Do the dishes',
+    			'Thinking something',
+    			'Just Running now'
+    		]
+    	},
+    	methods: {
+    		addNewTodo: function () {
+    			this.todos.push(this.newTodoText),
+    			this.newTodoText = ''
+    		}
+    	}
+    });
+
+    var vm4 = new Vue({
+        el: '#vm4'
+
+    });
+    var vm3 = new Vue({
+        el: '#vm3',
+        data: {
+            object: {
+                FirstName: 'Deng',
+                LastName: 'xianxiao',
+                Age: 24
+            }
+        }
+    });
+
+    var vm2 = new Vue({
+        el: '#vm2',
+        data: {
+            items: [{
+                message: 'one'
+            }, {
+                message: 'two'
+            }, {
+                message: 'three'
+            }]
+        }
+    });
+    var vm1 = new Vue({
+        el: '#vm1',
+        data: {
+            parentMessage: 'parent',
+            items: [{
+                message: 'Foo'
+            }, {
+                message: 'Bar'
+            }, {
+                message: 'you know'
+            }]
+        }
+    });
+    </script>
+</body>
+
+</html>

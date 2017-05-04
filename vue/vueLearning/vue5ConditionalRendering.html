@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="vm1">
+        <h1 v-if="ok">hello world</h1>
+        <h2 v-else>No</h2>
+    </div>
+    <div id="vm2">
+        <template v-if="yes">
+            <h1>title</h1>
+            <h2>paragraph 1</h2>
+            <h3>paragraph 2</h3>
+        </template>
+        <template v-else>
+            <h1>t1</h1>
+            <h2>p1 1</h2>
+            <h3>p2 2</h3>
+        </template>
+    </div>
+    <div id="vm3">
+        <div v-if="type === 'A'">
+        	A
+        </div>
+        <div v-else-if="type === 'B'">
+        	B
+        </div>
+        <div v-else>
+        	Not A AND B
+        </div>
+    </div>
+    <div id="vm4">
+    	<template v-if="loginType === 'username'">
+    		<label for="">username</label>
+    		<input type="text" placeholder="Enter your username" key="username-input">
+    	</template>
+    	<template v-else>
+    		<label for="">email</label>
+    		<input type="text" placeholder="Enter you Email" key="email-input">
+    	</template>
+    	<button id="changeLoginType">change</button>
+    </div>
+    <div id="vm5">
+    	<h1 v-show="yes">
+    		v-show yes
+    	</h1>
+    </div>
+    <script src="../vue.js"></script>
+    <script type="text/javascript">
+    let vm5 = new Vue({
+    	el: '#vm5',
+    	data: {
+    		yes: false
+    	}
+    })
+    let vm4 = new Vue({
+    	el: '#vm4',
+    	data: {
+    		loginType: 'email'
+    	}
+    });
+    console.log(vm4);
+    document.getElementById('changeLoginType').addEventListener('click', function() {
+    	vm4._data.loginType === 'username' ? vm4._data.loginType = 'email' : vm4._data.loginType = 'username';
+    });
+    let vm3 = new Vue({
+    	el: '#vm3',
+    	data: {
+    		type: 'A'
+    	}
+    });
+    let vm2 = new Vue({
+        el: '#vm2',
+        data: {
+            yes: false
+        }
+    });
+    let vm1 = new Vue({
+        el: '#vm1',
+        data: {
+            ok: false
+        }
+    });
+    </script>
+</body>
+
+</html>

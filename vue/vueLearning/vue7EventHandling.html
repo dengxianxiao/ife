@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Evnet handling</title>
+</head>
+
+<body>
+    <div id="vm1">
+        <button v-on:click="greet">Greet</button>
+    </div>
+    <div id="vm2">
+    	<!-- ctrl + click -->
+        <button v-on:click.ctrl="say('hi')"> Say Hi</button>
+        <button v-on:click="say('what')"> Say What</button>
+        <button v-on:click="warn('Form cannot be submit.', $event)">warn</button>
+    </div>
+    <!-- alt + c -->
+    <input id="vm3" type="" name="" v-model="inputValue" v-on:keyup.alt.67="submit"> 
+
+    <script src="../vue.js"></script>
+    <script type="text/javascript">
+    var vm3 = new Vue({
+    	el: '#vm3',
+    	data: {
+    		inputValue: ''
+    	},
+    	methods: {
+    		submit: function () {
+    			alert(this.inputValue);
+    		}
+    	}
+    });
+    var vm2 = new Vue({
+    	el: '#vm2',
+    	methods: {
+    		say: function (msg) {
+    			alert(msg);
+    		},
+    		warn: function (msg, event) {
+    			if (event) event.preventDefault();
+    			alert(msg);
+    		}
+    	}
+    });
+    var vm1 = new Vue({
+        el: '#vm1',
+        data: {
+            name: 'Vue.js'
+        },
+        methods: {
+            greet: function(event) {
+                alert('Hello ' + this.name + " !");
+                alert(event.target.tagName);
+            }
+        }
+    });
+    </script>
+</body>
+
+</html>

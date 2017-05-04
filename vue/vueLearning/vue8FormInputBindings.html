@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Form Input Bindings</title>
+</head>
+
+<body>
+    <div id="vm1">
+    	<!-- change finish -->
+        <input v-model.lazy="message" placeholder="enter message" type="" name="">
+        <p>Message is: {{message}}</p>
+    </div>
+    <div id="vm2">
+        <span>Mutiline message is:</span>
+        <p style="white-space: pre">{{ message }}</p>
+        <br>
+        <textarea v-model="message" placeholder="enter message"></textarea>
+    </div>
+    <div id="vm3">
+        <input id="checkbox1" v-model="checked" v-bind:true-value="a" v-bind:false-value="b" type="checkbox" name="">
+        <label for="checkbox1">{{ checked }}</label>
+    </div>
+    <div id="vm4">
+        <input type="checkbox" id="jack" value="hh" v-model="checkedNames">
+        <label for="jack">Jack</label>
+        <input type="checkbox" id="john" value="John" v-model="checkedNames">
+        <label for="john">John</label>
+        <input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
+        <label for="mike">Mike</label>
+        <br>
+        <span>Checked names: {{ checkedNames }}</span>
+    </div>
+    <div id="vm5" class="demo">
+        <input type="radio" id="one" value="One" v-model="picked">
+        <label for="one">One</label>
+        <br>
+        <input type="radio" id="two" value="Two" v-model="picked">
+        <label for="two">Two</label>
+        <br>
+        <span>Picked: {{ picked }}</span>
+    </div>
+    <div id="vm6" class="demo">
+        <select v-model="selected">
+            <option>A</option>
+            <option>B</option>
+            <option>C</option>
+        </select>
+        <span>Selected: {{ selected }}</span>
+    </div>
+    <div id="vm7">
+    	<select v-model="selected">
+    		<option v-for="option in options" v-bind:value="option.value">
+    			{{ option.text }}
+    		</option>
+    	</select>
+    	<span>Selected value: {{ selected }}</span>
+    </div>
+    <div id="vm8">
+    	<select v-model="selected">
+    		<option v-bind:value="{ number: 124 }">124</option>
+    		<option v-bind:value="{ number: '12sds' }">12sds</option>
+    		<option v-bind:value="{ number: 333 }">333</option>
+    	</select>
+    	<span> select value: {{ selected.number }}</span>
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+    var vm8 = new Vue({
+    	el: '#vm8',
+    	data: {
+    		selected: '',   		
+    		number: 333
+    	}
+    });
+    var vm7 = new Vue({
+    	el: '#vm7',
+    	data: {
+    		selected: 'C',
+    		options: [
+    			{ text: 'One', value: 'A'},
+    			{ text: 'Two', value: 'B'},
+    			{ text: 'Three', value: 'C'}
+    		]
+    	}
+    });
+    var vm6 = new Vue({
+        el: '#vm6',
+        data: {
+            selected: null
+        }
+    });
+    var vm5 = new Vue({
+        el: '#vm5',
+        data: {
+            picked: ''
+        }
+    });
+    var vm4 = new Vue({
+        el: '#vm4',
+        data: {
+        	a: 'aaaa',
+        	b: 'bbbbb',
+            checkedNames: []
+        }
+    });
+    var vm3 = new Vue({
+        el: '#vm3',
+        data: {
+        	a: 'aaaa',
+        	b: 'bbb',
+            checked: 'name'
+        }
+    });
+    var vm2 = new Vue({
+        el: '#vm2',
+        data: {
+            message: ''
+        }
+    });
+    var vm1 = new Vue({
+        el: '#vm1',
+        data: {
+            message: ''
+        }
+    });
+    </script>
+</body>
+
+</html>

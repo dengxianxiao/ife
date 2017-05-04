@@ -6,6 +6,7 @@
     <title>Dynamic Data Binding 01 And 02</title>
 </head>
 <div id="testEvent"></div>
+
 <body>
     <script type="text/javascript">
     //发布订阅模式
@@ -84,7 +85,7 @@
                     console.log('你访问了' + key);
                     return val;
                 },
-                set: function(newVal) {                  
+                set: function(newVal) {
                     if (newVal === val) return;
                     //发布事件
                     if (_this.pubSub.handlers.hasOwnProperty(key)) {
@@ -95,7 +96,7 @@
                     val = newVal;
                     if (typeof newVal === 'object') {
                         val = new Observer(newVal).data;
-                    } 
+                    }
                     console.log('你设置了' + key + ' = ' + newVal);
                 }
             });
@@ -114,8 +115,11 @@
     });
     console.log(app1);
     let app2 = new Observer({
-        university: 'bupt',
-        major: 'computer'
+        name: {
+            firstName: 'shaofeng',
+            lastName: 'liang'
+        },
+        age: 25
     });
     console.log(app2);
     let app3 = new Observer({
@@ -136,12 +140,11 @@
     let test = document.getElementById('testEvent');
     let evt = document.createEvent('Event');
     evt.initEvent('customEvent', true, true);
-    test.addEventListener('customEvent', function () {
+    test.addEventListener('customEvent', function() {
         // console.log('cccc');
     });
     //触发事件
     test.dispatchEvent(evt);
-
     </script>
 </body>
 
